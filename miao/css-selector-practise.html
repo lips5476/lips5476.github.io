@@ -14,31 +14,46 @@
 
     }
 
-    p.a:active {
-      color: green;
-    }
-
     p.a:focus {
       color: blue;
     }
 
-    p[class^=' c'],
-    p[class*='c']>span {
-      color: red;
-    }
-
-    p[class^=' c'],
-    p[class*='c']>span>span:nth-child(1) {
+    p.a:active {
       color: green;
     }
 
-    p[class^=' c'],
-    p[class*='c']>span>span:nth-child(2) {
+
+
+    p[class='a c']>span {
+      color: red;
+    }
+
+    p[class='a c']>span>span:nth-child(1) {
+      color: green;
+    }
+
+    p[class='a c']>span>span:nth-child(2) {
       color: blue;
     }
 
-    body>div :first-child p {
+    body>div:first-of-type>p~a:link {
       color: pink;
+    }
+
+    body>div:first-of-type>p~a:visited {
+      color: orange;
+    }
+
+    body>div:first-of-type>p~a:nth-child(n+5):nth-child(-n+6) {
+      color: blue;
+    }
+
+    body>div:first-of-type>p~a:nth-child(n+7):nth-child(-n+8) {
+      color: yellow;
+    }
+
+    body>div:first-of-type>p~a:nth-last-child(-n+2) {
+      font-size: 30px;
     }
   </style>
 </head>
@@ -252,11 +267,6 @@
     .prime>ul>li:nth-child(5n + 10) {
       color: blue;
     }
-
-    /* li:nth-child(2n + 4),
-  li:nth-child(3n + 6),
-  li:nth-child(4n + 8),
-  li:nth-child(5n + 10)  */
   </style>
   <div class="prime">
     <p>让所有的质/素数(prime)（2，3，5，7，11，13……）跟合数（4，6，8，9，10……）为不同的颜色</p>
