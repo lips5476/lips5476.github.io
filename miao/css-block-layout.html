@@ -30,31 +30,39 @@
 
         #d1 {
             width: 600px;
-            /* background-color: skyblue; */
+            height: auto;
             margin: -15px auto 20px;
             display: flow-root;
 
         }
 
-        #d1>div {
+        section {
+            height: 220px;
             width: 180px;
-            height: 40px;
+            display: inline-block;
+            margin-right: 25px;
+            vertical-align: top;
+
+        }
+
+        section:last-child {
+            margin-right: 0;
+        }
+
+        section>div {
             box-sizing: border-box;
-            border: 3px solid black;
-            margin: 15px 30px 0 0;
+            height: 40px;
+            width: 100%;
+            margin-top: 15px;
             background-color: pink;
-            float: left;
+            border: 3px solid;
             text-align: center;
-            line-height: 2em;
+            line-height: 34px;
 
         }
 
-        #d1>div:hover {
+        section>div:hover {
             background-color: red;
-        }
-
-        #d1>div:nth-child(3n) {
-            margin-right: 0px;
         }
 
         .p3 {
@@ -83,18 +91,24 @@
         宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px
         页面主体 宽度600px 页面主体 宽度600px</p>
     <div id="d1">
-        <div>宽180高40(包含边框)</div>
-        <div>产品</div>
-        <div>产品</div>
-        <div>水平间隙30px</div>
-        <div>产品</div>
-        <div>产品</div>
-        <div>垂直间隙15px</div>
-        <div>产品</div>
-        <div>产品</div>
-        <div>边框宽度3px</div>
-        <div>产品</div>
-        <div>产品</div>
+        <section>
+            <div>宽180高40(包含边框)</div>
+            <div>水平间隙30px</div>
+            <div>垂直间隙15px</div>
+            <div>边框宽度3px</div>
+        </section>
+        <section>
+            <div>产品</div>
+            <div>产品</div>
+            <div>产品</div>
+            <div>产品</div>
+        </section>
+        <section>
+            <div>产品</div>
+            <div>产品</div>
+            <div>产品</div>
+            <div>产品</div>
+        </section>
     </div>
     <p class="p3">link</p>
     <p class="p3">link</p>
