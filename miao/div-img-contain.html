@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+        }
+
+        div {
+            border: 2px solid;
+            background-color: pink;
+            margin: 0 auto;
+            margin-top: 10px;
+
+
+        }
+
+        [img1] {
+
+            height: 200px;
+            width: 200px;
+            background: url(../miao/img/heng.jfif) no-repeat;
+            background-size: contain;
+            background-position: center;
+        }
+
+        [img2] {
+            height: 200px;
+            width: 200px;
+            background: url(../miao/img/shu.jfif) no-repeat;
+            background-size: contain;
+            background-position: center;
+        }
+
+        [img3] {
+            height: 200px;
+            width: 200px;
+            position: relative;
+        }
+
+        [img3]>img {
+            position: absolute;
+            max-width: 100%;
+            max-height: 100%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+
+        [img4] {
+            height: 200px;
+            width: 200px;
+        }
+
+        [img4]>img {
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div img1></div>
+    <div img2></div>
+    <div img3><img src="../miao/img/heng.jfif" alt=""></div>
+    <div img4><img src="../miao/img/shu.jfif" alt=""></div>
+
+</body>
+
+</html>
