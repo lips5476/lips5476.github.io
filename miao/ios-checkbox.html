@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .ck {
+            appearance: none;
+            -webkit-appearance: none;
+            position: relative;
+            width: 52px;
+            height: 32px;
+            background: #dfdfdf;
+            border-radius: 16px;
+            border: 1px solid #dfdfdf;
+            box-sizing: border-box;
+        }
+
+        .ck:checked {
+            border-color: #04be02;
+            background-color: #04be02;
+        }
+
+
+        .ck::before {
+            content: " ";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 30px;
+            border-radius: 15px;
+            width: 50px;
+            background-color: #fdfdfd;
+        }
+
+        .ck::after {
+            content: " ";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 30px;
+            border-radius: 15px;
+            width: 10px;
+            padding: 0 10px 0 10px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+            transition: width .4s, padding .3s, transform .5s;
+        }
+
+        .ck:checked::before {
+            transform: scale(0);
+        }
+
+        .ck:checked::after {
+            transition: width .3s, padding .4s, transform .4s;
+            width: 30px;
+            padding: 0;
+            transform: translateX(20px);
+        }
+    </style>
+</head>
+
+<body>
+    <input type="checkbox" class="ck">
+</body>
+
+</html>
