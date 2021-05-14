@@ -15,13 +15,13 @@
             appearance: none;
             -webkit-appearance: none;
             position: relative;
-            outline: none;
             width: 52px;
             height: 32px;
-            background: #dfdfdf;
+            background: white;
             border-radius: 16px;
             border: 1px solid #dfdfdf;
             box-sizing: border-box;
+            transition: border-color .5s, background-color .5s;
         }
 
         .ck:checked {
@@ -39,6 +39,7 @@
             border-radius: 15px;
             width: 50px;
             background-color: #fdfdfd;
+            transition: transform .5s;
         }
 
         .ck::after {
