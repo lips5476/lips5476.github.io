@@ -11,66 +11,70 @@
             zoom: 5;
         }
 
-        .ck {
-            appearance: none;
-            -webkit-appearance: none;
-            position: relative;
+        label {
+            display: block;
             width: 52px;
             height: 32px;
             background: white;
-            border-radius: 16px;
             border: 1px solid #dfdfdf;
             box-sizing: border-box;
-            transition: border-color .5s, background-color .5s;
+            border-radius: 16px;
+            position: relative;
+            transition: border-color .4s, background-color .4s;
+
         }
 
-        .ck:checked {
+        input:checked+label {
             border-color: #04be02;
             background-color: #04be02;
+
         }
 
-
-        .ck::before {
-            content: " ";
+        label::before {
+            content: '';
             position: absolute;
-            top: 0;
             left: 0;
+            top: 0;
             height: 30px;
-            border-radius: 15px;
             width: 50px;
+            border-radius: 15px;
             background-color: #fdfdfd;
-            transition: transform .5s;
+            transition: transform .4s;
+
+
         }
 
-        .ck::after {
-            content: " ";
+        label::after {
+            content: '';
             position: absolute;
-            top: 0;
             left: 0;
+            top: 0;
             height: 30px;
-            border-radius: 15px;
             width: 10px;
             padding: 0 10px 0 10px;
+            border-radius: 15px;
             background-color: white;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
-            transition: width .4s, padding .3s, transform .5s;
+            transition: width .4s, padding .3s, left .4s;
         }
 
-        .ck:checked::before {
+        input:checked+label::before {
             transform: scale(0);
         }
 
-        .ck:checked::after {
-            transition: width .3s, padding .4s, transform .4s;
+        input:checked+label::after {
+            transition: width .3s, padding .4s, left .4s;
             width: 30px;
             padding: 0;
-            transform: translateX(20px);
+            left: 20px;
         }
     </style>
 </head>
 
 <body>
-    <input type="checkbox" class="ck">
+    <input type="checkbox" hidden id="ck">
+    <label for="ck"></label>
+
 </body>
 
 </html>
