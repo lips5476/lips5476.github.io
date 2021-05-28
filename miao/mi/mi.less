@@ -1,0 +1,272 @@
+* {
+    margin : 0;
+    padding: 0
+}
+
+em,
+i {
+    font-style: normal
+}
+
+li {
+    list-style: none
+}
+
+img {
+    border        : 0;
+    vertical-align: middle
+}
+
+button {
+    cursor: pointer
+}
+
+a {
+    color          : #666;
+    text-decoration: none
+}
+
+a:hover {
+    color: #c81623
+}
+
+button,
+input {
+    font-family: Microsoft YaHei, Heiti SC, tahoma, arial, Hiragino Sans GB, "\5B8B\4F53", sans-serif
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    background-color      : #fff;
+    font                  : 12px/1.5 Microsoft YaHei, Heiti SC, tahoma, arial, Hiragino Sans GB, "\5B8B\4F53", sans-serif;
+    color                 : #666
+}
+
+.hide,
+.none {
+    display: none
+}
+
+.clearfix:after {
+    visibility: hidden;
+    clear     : both;
+    display   : block;
+    content   : ".";
+    height    : 0
+}
+
+.clearfix {
+    *zoom: 1
+}
+
+@font-face {
+    font-family: 'miIcon';
+    src        : url(./iconfont.woff)format('woff');
+}
+
+header {
+    height             : 140px;
+    // background-color: pink;
+
+    .site-topbar {
+        position  : relative;
+        height    : 40px;
+        width     : 100%;
+        font-size : 12px;
+        color     : #b0b0b0;
+        background: #333;
+
+        .container {
+            height: 100%;
+            width : 1226px;
+            margin: 0 auto;
+
+            .topbar-nav {
+                float      : left;
+                height     : 40px;
+                line-height: 40px;
+
+                a {
+                    color      : #b0b0b0;
+                    line-height: 40px;
+                    display    : inline-block;
+                }
+
+                span {
+                    margin: 0 4px;
+                    color : #424242;
+                }
+            }
+
+            .shoppingCar {
+                font-family     : 'shoppingcar';
+                height          : 100%;
+                width           : 120px;
+                float           : right;
+                background-color: rgba(66, 66, 66, 1);
+
+                .icon {
+                    font-family: 'miIcon';
+
+                    &::before {
+                        content    : "\E60C";
+                        font-size  : 15px;
+                        line-height: 40px;
+                        margin-left: 20px;
+                    }
+                }
+
+
+
+
+                .gouwu {
+                    vertical-align: top;
+                    display       : inline-block;
+                    font-size     : 13px;
+                    line-height   : 40px;
+                }
+
+                .count {
+                    vertical-align: top;
+                    display       : inline-block;
+                    font-size     : 13px;
+                    line-height   : 40px;
+                }
+
+                &:hover {
+                    // background-color: skyblue;
+                }
+
+            }
+
+            .loginBox {
+                float              : right;
+                height             : 100%;
+                // background-color: pink;
+                margin-right       : 15px;
+
+                a {
+                    color      : #b0b0b0;
+                    line-height: 40px;
+                    display    : inline-block;
+                    padding    : 0 5px;
+                }
+
+                span {
+                    color: #424242;
+                }
+
+            }
+
+        }
+    }
+
+    .site-header {
+        height: 100px;
+
+        .search-container {
+            height          : 100%;
+            width           : 1226px;
+            background-color: pink;
+            margin          : 0 auto;
+            position        : relative;
+
+            .head-logo {
+                height             : 56px;
+                width              : 56px;
+                position           : absolute;
+                top                : 50%;
+                left               : 0;
+                transform          : translate(0, -50%);
+                // background-color: skyblue;
+
+                a {
+                    display       : inline-block;
+                    vertical-align: top;
+                    width         : 100%;
+                    height        : 100%;
+                    position      : absolute;
+                    line-height   : 40px;
+
+                    &::before {
+                        content        : "";
+                        height         : 100%;
+                        width          : 100%;
+                        background     : url(./img/logo-mi2.png) no-repeat;
+                        background-size: contain;
+                        display        : inline-block;
+                        vertical-align : top;
+
+                    }
+                }
+            }
+
+            .searchBox {
+                float: right;
+
+
+
+                .searchFrame {
+                    height          : 50px;
+                    width           : 246px;
+                    box-sizing      : border-box;
+                    border          : 1px solid rgb(254, 254, 254);
+                    border-right    : none;
+                    background-color: transparent;
+                    float           : left;
+                    margin-top      : 25px;
+                    outline         : 0;
+                    padding-left    : 15px;
+                    font-size       : 10px;
+                    transition      : .4s;
+
+                    &:focus {
+                        border-color: #FF6A00;
+
+                        +.searchButton {
+                            border-color: #FF6A00;
+                        }
+                    }
+                }
+
+                .searchButton {
+                    float           : left;
+                    height          : 50px;
+                    width           : 50px;
+                    box-sizing      : border-box;
+                    border          : 1px solid rgb(254, 254, 254);
+                    background-color: transparent;
+                    margin-top      : 25px;
+                    font-family     : "miIcon";
+                    font-size       : 25px;
+                    line-height     : 48px;
+                    text-align      : center;
+                    transition      : .4s;
+
+                    &:hover {
+                        background-color: #FF6A00;
+                        border-color    : #FF6A00;
+                        color           : white;
+                    }
+                }
+
+
+
+            }
+
+            .site-tabBar {}
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+    }
+}
