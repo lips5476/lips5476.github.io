@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <style>
+        body {
+            margin: 0;
+            position: relative;
+        }
+
+        @keyframes rotateRadius {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes rotateRadiusfan {
+            0% {
+                transform: translate(-50%, 0) rotate(0deg);
+
+            }
+
+            100% {
+                transform: translate(-50%, 0) rotate(-360deg);
+            }
+        }
+
+        [outer] {
+            position: absolute;
+            height: 500px;
+            width: 500px;
+            background-color: pink;
+            border-radius: 100%;
+            animation-name: rotateRadius;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+
+
+        }
+
+        [inner] {
+            width: 100px;
+            height: 100px;
+            border-radius: 100%;
+            background-color: skyblue;
+            position: absolute;
+            text-align: center;
+            left: 50%;
+            animation-name: rotateRadiusfan;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div outer>
+        <div inner>asdasdasd</div>
+    </div>
+</body>
+
+</html>
