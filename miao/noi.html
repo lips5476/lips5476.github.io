@@ -28,7 +28,7 @@
         var a = +prompt();
         var b = +prompt();
         var c = +prompt();
-        console.log((a + b) / c);
+        console.log((a + b) % c == 0 ? (a + b) / c : 0);
     </script>
 
     <script id="ch0103/04">
@@ -88,7 +88,7 @@
     <script id="ch0103/12">
         var r = +prompt();
         var V = 4 / 3 * 3.14 * Math.pow(r, 3);
-        console.log(V.toFixed(4));
+        console.log(V.toFixed(2));
     </script>
     <script id="ch0103/13">
         var num = +prompt();
