@@ -103,6 +103,7 @@ header {
 
                 .downloadApp {
                     position: relative;
+                    z-index : 11;
 
                     .appcode {
                         margin     : 0;
@@ -120,6 +121,7 @@ header {
                         line-height: 1;
                         overflow   : hidden;
                         transition : height .3s;
+
 
                         img {
                             box-sizing: border-box;
@@ -385,8 +387,11 @@ header {
 
                     &:hover {
                         .pull-down {
+                            border-top: 1px solid #e0e0e0;
                             height    : 230px;
                             box-shadow: 0 2px 2px rgba(143, 143, 143, 0.4);
+
+
 
                         }
                     }
@@ -420,7 +425,6 @@ header {
                             }
 
                             .pull-down {
-                                border-top      : 1px solid #e0e0e0;
                                 box-sizing      : border-box;
                                 position        : absolute;
                                 left            : 0;
@@ -432,6 +436,7 @@ header {
                                 overflow        : hidden;
                                 transition      : height 1s, z-index 2s;
                                 color           : black;
+
 
                                 >ul {
                                     height             : 201px;
@@ -1375,7 +1380,7 @@ header {
                     // background-color: yellow;
                     padding-bottom     : 14px;
                     box-sizing         : border-box;
-
+                    margin-right       : 14px;
 
                     a {
                         display   : block;
@@ -1397,18 +1402,15 @@ header {
                         }
                     }
 
+                    .beforeUl {
+                        height: 100%;
+                        width : 100%;
 
-                }
-
-                .firstListDivision {
-                    // background-color: yellow;
-
-
-                    ul {
-                        li {
+                        >li {
                             height          : 300px;
                             width           : 234px;
                             background-color: white;
+                            position        : relative;
                             transition      : all .4s;
 
                             &:first-child {
@@ -1420,218 +1422,25 @@ header {
                                 transform : translateY(-3px);
                                 box-shadow: 0 15px 30px rgba(0, 0, 0, .1);
                             }
-
-                        }
-                    }
-                }
-
-                .lastListDivision {
-                    background-color: transparent;
-                    margin-left     : 14px;
-
-                    .lastListDivisionUl {
-                        li {
-                            height          : 300px;
-                            width           : 234px;
-                            background-color: white;
-                            transition      : all .4s;
-
-                            &:first-child {
-                                box-sizing   : border-box;
-                                padding      : 20px 0;
-                                margin-bottom: 14px;
-
-                                a {
-                                    display: block;
-                                    width  : 100%;
-                                    height : 100%;
-
-                                    // background-color: pink;
-                                    &:hover {
-                                        position  : relative;
-                                        transform : none;
-                                        box-shadow: none;
-                                    }
-
-                                    .imgBox {
-                                        margin: 0 37px 18px 37px;
-
-                                        img {
-
-                                            display: block;
-                                            height : 160px;
-                                            width  : 160px;
-                                        }
-                                    }
-
-                                    .title {
-                                        box-sizing   : border-box;
-                                        margin       : 0 10px 2px 10px;
-                                        text-align   : center;
-                                        text-align   : center;
-                                        text-overflow: ellipsis;
-                                        white-space  : nowrap;
-                                        overflow     : hidden;
-                                        font-size    : 14px;
-                                        font-weight  : 400;
-                                        color        : #333;
-                                    }
-
-                                    .advertisment {
-                                        margin       : 0 10px 10px;
-                                        height       : 18px;
-                                        font-size    : 12px;
-                                        color        : #b0b0b0;
-                                        text-align   : center;
-                                        text-overflow: ellipsis;
-                                        white-space  : nowrap;
-                                        overflow     : hidden;
-                                    }
-
-                                    .price {
-                                        font      : 14px;
-                                        margin    : 0 10px 14px;
-                                        text-align: center;
-                                        color     : #ff6700;
-
-                                        del {
-                                            margin-left    : .5em;
-                                            color          : #b0b0b0;
-                                            text-decoration: line-through;
-                                        }
-                                    }
-                                }
-
-                                &:hover {
-                                    position  : relative;
-                                    transform : translateY(-3px);
-                                    box-shadow: 0 15px 30px rgba(0, 0, 0, .1);
-                                }
-                            }
-
-                            &:last-child {
-                                background-color: transparent;
-
-                                >div {
-                                    height          : 143px;
-                                    width           : 100%;
-                                    transition      : .4s;
-                                    background-color: white;
-                                    position        : relative;
-
-                                    &:hover {
-                                        position  : relative;
-                                        transform : translateY(-3px);
-                                        box-shadow: 0 15px 30px rgba(0, 0, 0, .1);
-                                    }
-
-                                    a {
-                                        padding-top: 50px;
-                                        box-sizing : border-box;
-                                        display    : block;
-                                        width      : auto;
-                                        height     : auto;
-
-                                        &:hover {
-
-                                            transform : none;
-                                            box-shadow: none;
-                                        }
-                                    }
-
-                                }
-
-                                .liDivision1 {
-                                    margin-bottom: 14px;
-
-                                    a {
-
-
-                                        .Division1ImgBox {
-                                            position: absolute;
-                                            right   : 20px;
-                                            top     : 32px;
-                                            width   : 80px;
-                                            height  : 80px;
-
-                                            .smallBoxIMG {
-                                                width : 80px;
-                                                height: 80px;
-                                            }
-
-                                            &:hover {
-                                                transform : none;
-                                                box-shadow: none;
-                                            }
-                                        }
-
-                                        .Division1Title {
-                                            color      : #333;
-                                            margin     : -10px 110px 5px 30px;
-                                            font-size  : 14px;
-                                            font-weight: 400;
-                                        }
-
-                                        .price {
-                                            margin   : 0 110px 0 30px;
-                                            font-size: 12px;
-                                            color    : #ff6700;
-                                        }
-                                    }
-
-                                }
-
-                                .liDivision2 {
-                                    a {
-                                        .figure-more {
-                                            position: absolute;
-                                            right   : 35px;
-                                            top     : 48px;
-                                            width   : 48px;
-                                            height  : 48px;
-                                            color   : #ff6700;
-
-                                            i {
-                                                font-size  : 48px;
-                                                line-height: 48px;
-
-                                                &::before {
-                                                    content: "\E615";
-                                                }
-                                            }
-                                        }
-
-                                        .more {
-                                            display  : block;
-                                            margin   : 0 110px 0 30px;
-                                            font-size: 18px;
-                                            color    : #333;
-
-                                            small {
-                                                display  : block;
-                                                font-size: 12px;
-                                                color    : #757575;
-                                            }
-                                        }
-
-                                    }
-                                }
-                            }
                         }
 
                     }
+
+
+
+
                 }
 
                 .onSeason {
                     float              : left;
                     width              : 978px;
-                    height             : 100%;
-                    margin-left        : 14px;
+                    height             : 628px;
                     // background-color: skyblue;
-                    padding-bottom     : 14px;
-                    box-sizing         : border-box;
 
-                    li {
+                    padding-bottom: 14px;
+                    box-sizing    : border-box;
+
+                    >li {
                         box-sizing         : border-box;
                         padding            : 20px 0;
                         background-color   : white;
@@ -1711,51 +1520,117 @@ header {
                                 }
                             }
                         }
-                    }
-                }
 
-                .lastonSeason {
-                    margin-left: 0px;
+                        &:last-child.last-column-li {
+                            padding         : 0;
+                            background-color: transparent;
 
-                    li {
-                        background-color   : white;
-                        width              : 234px;
-                        height             : 300px;
-                        // background-color: orange;
-                        float              : left;
-                        margin             : 0 0 14px 14px;
-                        transition         : .4s;
+                            &:hover {
 
-                        &:nth-child(1),
-                        &:nth-child(5) {
-                            padding: 0;
 
-                            a {
-                                display            : block;
+                                transform : none;
+                                box-shadow: none;
+                            }
+
+                            >ul {
                                 width              : 100%;
                                 height             : 100%;
                                 // background-color: pink;
 
-                                .imgBox {
-                                    margin: 0;
-                                    width : 100%;
-                                    height: 100%;
+                                >li {
+                                    height          : 143px;
+                                    width           : 234px;
+                                    background-color: white;
+                                    transition      : .4s;
 
-                                    img {
+                                    &:first-child {
+                                        margin-bottom: 14px;
+                                    }
 
-                                        display: block;
-                                        height : 100%;
-                                        width  : 100%;
+                                    &:hover {
+                                        position  : relative;
+                                        transform : translateY(-3px);
+                                        box-shadow: 0 15px 30px rgba(0, 0, 0, .1);
+
                                     }
                                 }
                             }
 
-
                         }
                     }
-
                 }
 
+                .mainProducts {
+                    width : 978px;
+                    height: 670px;
+                    float : left;
+
+                    // background-color: pink;
+                    padding-bottom: 14px;
+                    box-sizing    : border-box;
+                    position      : absolute;
+                    right         : 0;
+                    bottom        : 0;
+
+                    .no-height {
+                        .choose {
+                            float        : right;
+                            margin-left  : 20px;
+                            font-size    : 16px;
+                            border-bottom: 2px solid transparent;
+                            transition   : all 0s 9999999s;
+                        }
+
+                        .choose:nth-child(2) {
+                            border-color: #ff6700;
+                            color       : #ff6700;
+                        }
+
+                        &:hover .choose {
+                            border-color: transparent;
+                            color       : black;
+                            box-sizing  : border-box;
+                            transition  : none;
+                        }
+
+                        .choose:hover {
+                            border-color: #ff6700;
+                            color       : #ff6700;
+                            box-sizing  : border-box;
+                            transition  : none;
+                        }
+
+                        .ulBox {
+
+                            height    : 628px;
+                            width     : 100%;
+                            position  : absolute;
+                            left      : 0;
+                            bottom    : 0;
+                            transition: all 0s 9999999s;
+                        }
+
+                        .choose:nth-child(2) {
+                            .ulBox {
+                                visibility: visible;
+
+                            }
+                        }
+
+                        &:hover .choose .ulBox {
+                            visibility: hidden;
+                            transition: none;
+                        }
+
+                        .choose:hover .ulBox {
+                            visibility: visible;
+                            transition: none;
+                        }
+
+                    }
+
+
+                }
 
             }
 
