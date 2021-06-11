@@ -501,6 +501,285 @@
 
 
 
+    <script id="ch0105/01">
+        var count = +prompt();
+        var sum = 0;
+
+        for (var i = 0; i < count; i++) {
+            sum += +prompt()
+        }
+
+        console.log((sum / count).toFixed(2))
+
+
+    </script>
+    <script id="ch0105/02">
+
+        var sum = 0;
+
+        for (var i = 0; i < 12; i++) {
+            sum += +prompt()
+        }
+
+        console.log('$' + (sum / 12).toFixed(2))
+    </script>
+    <script id="ch0105/03">
+        var count = +prompt();
+        var sum = 0;
+
+        for (var i = 0; i < count; i++) {
+            sum += +prompt()
+        }
+
+        console.log((sum / count).toFixed(4))
+
+    </script>
+    <script id="ch0105/04">
+        var count = +prompt();
+        var sum = 0;
+
+        for (var i = 0; i < count; i++) {
+            sum += +prompt()
+        }
+        console.log(sum, (sum / count).toFixed(5))
+
+
+    </script>
+    <script id="ch0105/05">
+        var count = +prompt();
+        var most = 0;
+
+        for (var i = 0; i < count; i++) {
+            var input = +prompt();
+            if (input > most) {
+                most = input;
+            }
+        }
+        console.log(most)
+
+    </script>
+    <script id="ch0105/06">
+        var count = +prompt();
+        var max = -Infinity;
+        var min = Infinity;
+
+        for (var i = 0; i < count; i++) {
+            var input = +prompt();
+            if (input > max) {
+                max = input;
+
+            }
+            if (input < min) {
+                min = input;
+
+            }
+
+        }
+        console.log(max - min)
+
+    </script>
+    <script id="ch0105/07">
+        var count = +prompt();
+        var a = 0;
+        var b = 0;
+        var c = 0;
+
+        for (var i = 0; i < count; i++) {
+            var inputA = +prompt();
+            a += inputA;
+            var inputB = +prompt();
+            b += inputB;
+            var inputC = +prompt();
+            c += inputC;
+
+
+        }
+        console.log(a, b, c, (a + b + c))
+
+
+    </script>
+    <script id="ch0105/08">
+        var count = +prompt();
+        var restAll = 0
+        for (var i = 0; i < count - 1; i++) {
+            var input = +prompt();
+            restAll += input;
+        }
+        console.log((count - 2) * 180 - restAll)
+
+
+    </script>
+    <script id="ch0105/09">
+        var m = +prompt();
+        var n = +prompt();
+
+        var sum = 0;
+
+        if (m >= 0 && m <= n && n <= 300) {
+            var count = n - m;
+            for (var i = 0; i < count + 1; i++) {
+                if (m % 2 != 0) {
+                    sum += m;
+                }
+                m++;
+            }
+        }
+        console.log(sum)
+
+
+    </script>
+    <script id="ch0105/10">
+        var m = +prompt();
+        var n = +prompt();
+
+        var sum = 0;
+
+        if (m >= 0 && m <= n && n <= 1000) {
+            var count = n - m;
+            for (var i = 0; i < count + 1; i++) {
+                if (m % 17 == 0) {
+                    sum += m;
+                }
+                m++;
+            }
+        }
+        console.log(sum)
+    </script>
+    <script id="ch0105/11">
+        var count = +prompt();
+        var count1 = 0;
+        var count5 = 0;
+        var count10 = 0;
+
+        for (var i = 0; i < count; i++) {
+            var input = +prompt()
+            if (input === 1) {
+                count1++
+            }
+            if (input === 5) {
+                count5++
+            }
+
+            if (input === 10) {
+                count10++
+            }
+        }
+
+        console.log(count1, count5, count10)
+    </script>
+    <script id="ch0105/12">
+        var count = +prompt();
+        var appoint = +prompt();
+
+        var appearance = 0;
+
+        for (var i = 0; i < count; i++) {
+            var input = +prompt()
+            if (input === appoint) {
+                appearance++
+            }
+        }
+        console.log(appearance)
+    </script>
+    <script id="ch0105/13">
+        var appoint = +prompt();
+        var count = +prompt();
+        var result = 0;
+
+        for (var i = 0; i < count; i++) {
+            result = Math.pow(appoint, i + 1);
+
+        }
+        console.log(result)
+
+
+    </script>
+    <script id="ch0105/14">
+        var x = +prompt();
+        var n = +prompt();
+        var result = 0;
+
+        for (var i = 0; i < n; i++) {
+            result = x += x * 0.001
+
+        }
+        console.log(result.toFixed(4))
+
+
+    </script>
+    <script id="ch0105/15">
+        var rate = +prompt();
+        var principal = +prompt();
+        var year = +prompt();
+        for (var i = 0; i < year; i++) {
+            principal = (1 + 0.05) * principal;
+
+        }
+        console.log(Math.trunc(principal))
+
+    </script>
+    <script id="ch0105/16">
+        var N = +prompt();
+        var K = +prompt();
+        var Price = 200;
+        var sum = 0;
+        for (var i = 0; i < 20; i++) {
+            Price = (1 + k / 100) * price
+            sum += N
+            if (sum > Price) {
+                console.log(i + 1);
+                break;
+            }
+
+        }
+        if (i == 20) {
+            console.log('impossible');
+        }
+
+    </script>
+    <script id="ch0105/17">
+        var k = +prompt();
+        var a = [];
+        a[1] = 1, a[2] = 1;
+        if (k >= 1 && k <= 46) {
+            for (var i = 3; i < k + 1; i++) {
+                a[i] = a[i - 1] + a[i - 2];
+            }
+            console.log(a[k])
+        }
+    </script>
+    <script id="ch0105/18">
+        var n = +prompt();
+        var jiweiAll = +prompt();
+        var jiweivalid = +prompt();
+        var jiweiefficiency = jiweivalid / jiweiAll;
+        for (var i = 0; i < n - 1; i++) {
+            var allsample = +prompt();
+            var validsample = +prompt();
+            var efficiency = validsample / allsample;
+            if (efficiency - jiweiefficiency > 0.05) {
+                console.log('better')
+            }
+            else if (jiweiefficiency - efficiency > 0.05) {
+                console.log('worse')
+            }
+            else {
+                console.log('same')
+            }
+
+        }
+    </script>
+
+    <script id="ch0105/19">
+
+    </script>
+    <script id="ch0105/20">
+
+    </script>
+
+
+
+
 </body>
 
 </html>
