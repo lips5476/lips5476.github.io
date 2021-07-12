@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>画图</title>
+  <style>
+    canvas {
+      border: 2px solid #f0f;
+      display: block;
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas width="500" height="500"></canvas>
+</body>
+<script>
+  var canvas = document.querySelector('canvas')
+  canvas.style.imageRendering = 'pixelated' //放大时的插帧方式：不插帧，直接放大像素
+  var ctx = canvas.getContext('2d')
+
+  function dot(x, y, color = 'black') {
+    x = Math.round(x)
+    y = Math.round(y)
+    ctx.fillStyle = color
+    ctx.fillRect(x, y, 1, 1)
+  }
+  /**
+   * YOUR TASK
+      * 在 坐标 (42, 42) 画出一个点
+      * 画一条实线
+      * 画一条一个实点一个空点的虚线
+      * 画一条两个实点两个空点的虚线
+      * 画一条三个实点两个空点的虚线
+      * 画一条45度的斜线
+      * 画一条30度的斜线（与x轴或y轴的夹角呈30度）   /////////////////////////////////////////////////
+      * 画一条跨越画布左上角和右下角的对角线
+      * 画一个空心矩形
+      * 画一个实心矩形
+      * 画两个个空心的圆，居中：
+        * 一个半径为50像素
+        * 一个半径为200像素
+      * 画一个实心的圆，半径至少为100像素
+      * 画一个【大小合适】的sin(x)的图像
+
+      * 画出rgb色彩空间的某一面（尺寸要大于100x100）
+        如果做出上一题后，尝试将其每个点的坐标乘以一个矩阵（如(2,0,0,2)或(1,0.27得到新的位置，即绘制出被线性变幻后的色彩空间某一面
+        可以考虑如下几种矩阵：
+           2 0
+           0 2
+           ------
+           1  0.27
+           0  1
+           ------
+           0.5    0.87
+           -0.87  0.5
+
+   */
+</script>
+<script>
+  // 不可更改上面的代码
+  // 你的代码写在这里
+  // YOUR CODE GOES BELOW
+  // 在 坐标(42, 42) 画出一个点
+  dot(42, 42, 'black')
+  // 画一条实线
+  for (var i = 20; i <= 200; i++) {
+    dot(i, 10, 'black')
+  }
+  // 画一条一个实点一个空点的虚线
+  for (var i = 20; i <= 200; i += 2) {
+    dot(i, 15, 'black')
+  }
+  //画一条两个实点两个空点的虚线
+  for (var i = 42; i <= 100; i++) {
+    if (i % 2 == 0) {
+      if (i % 4 != 0) {
+        dot(i, 30, 'black');
+        dot(i - 1, 30, 'black');
+      }
+    }
+  }
+  // 画一条三个实点两个空点的虚线
+  for (var i = 42; i < 100; i++) {
+    if (i % 5 == 0) {
+      dot(i, 50, 'white');
+      dot(i - 1, 50, 'white');
+    }
+    else {
+      dot(i, 50, 'black');
+    }
+  }
+  // 画一条45度的斜线
+  var x = 75;
+  for (var y = 60; y <= 90; y++) {
+    dot(x, y, 'black');
+    x--;
+    if (x < 45) {
+      break
+    }
+  }
+  // 画一条30度的斜线（与x轴或y轴的夹角呈30度）    Math.tan()
+  for (var x = 0; x < 100; x++) {
+    var y = Math.tan(Math.PI / 3) * x
+    dot(x, y, 'black')
+  }
+  // 画一条跨越画布左上角和右下角的对角线
+  var x = 0;
+  for (var y = 0; y <= 500; y++) {
+    dot(x, y, 'red');
+    x++;
+    if (x > 500) {
+      break
+    }
+  }
+  // 画一个空心矩形
+  for (var y = 50; y <= 100; y++) {
+    if (y == 50 || y == 100) {
+      for (var x = 150; x <= 200; x++) {
+        dot(x, y, 'black');
+      }
+    }
+    else {
+      for (var x = 150; x <= 200; x++) {
+        if (x == 150 || x == 200) {
+          dot(x, y, 'black');
+        }
+        else {
+          continue;
+        }
+      }
+    }
+  }
+  // 画一个实心矩形
+  for (var y = 50; y <= 100; y++) {
+    for (var x = 250; x <= 300; x++) {
+      dot(x, y, 'black');
+    }
+  }
+  // 画两个个空心的圆，居中：
+  // * 一个半径为50像素
+  // * 一个半径为200像素
+  var x = 250;
+  var y = 250;
+  var r1 = 50;
+  for (var i = 0; i <= 500; i++) {
+    for (var j = 0; j <= 500; j++) {
+      var distance = parseInt(Math.sqrt((i - x) * (i - x) + (j - y) * (j - y))) - r1
+      if (distance == 0) {
+        dot(i, j, 'black')
+      }
+    }
+  }
+  var r2 = 200;
+  for (var i = 0; i <= 500; i++) {
+    for (var j = 0; j <= 500; j++) {
+      var distance = parseInt(Math.sqrt((i - x) * (i - x) + (j - y) * (j - y))) - r2
+      if (distance == 0) {
+        dot(i, j, 'black')
+      }
+    }
+  }
+  // 画一个实心的圆，半径至少为100像素
+  var x = 150;
+  var y = 370;
+  var r1 = 100;
+  for (var i = 0; i <= 500; i++) {
+    for (var j = 0; j <= 500; j++) {
+      var distance = parseInt(Math.sqrt((i - x) * (i - x) + (j - y) * (j - y))) - r1
+      if (distance <= 0) {
+        dot(i, j, 'black')
+      }
+    }
+  }
+  // 画一个【大小合适】的sin(x)的图像
+  var deg = 0;
+  for (var x = 45; x < 150; x += 2) {
+    if (deg <= 180) {
+      deg++;
+    }
+    dot(x, 200 + 2 * Math.sin(deg), 'red')
+  }
+
+  //画出rgb色彩空间的某一面（尺寸要大于100x100）
+  for (var i = 255; i >= 0; i--) {
+    for (var j = 255; j >= 0; j--) {
+      dot(i / 2 + 100, j / 2 + 300, 'rgb(255,' + i + ',' + j + ')')
+    }
+  }
+
+</script>
+
+</html>
