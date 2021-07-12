@@ -30,8 +30,8 @@ var lips5476 = function () {
 
   function compact(arr) {
     for (var i = 0, len = arr.length; i < len; i++) {
-      if (arr[i] == "false" || arr[i] == "") {
-        arr.slice(i, 1)
+      if (arr[i] == "false" || arr[i] == "" || arr[i] == "NaN") {
+        arr.splice(i, 1)
         len--
         i--
       }
