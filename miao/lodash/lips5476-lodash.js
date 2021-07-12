@@ -124,7 +124,7 @@ var lips5476 = function () {
     for (var i = 0; i < arr.length; i++) {
       var item = arr[i]
       if (Array.isArray(item)) {
-        item = flattenDeep(item, Depth - 1)
+        item = flattenDepth(item, Depth - 1)
         for (var j = 0; j < item.length; j++) {
           res.push(item[j])
         }
@@ -214,6 +214,44 @@ var lips5476 = function () {
   function filter(arr, f) {
 
   }
+  function reduce(arr, f, initial) {
+    if (Array.isArray(arr)) {
+      var startIndex = 0
+      if (arguments.length == 2) {
+        initial = arr[0];
+        startIndex = 1
+      }
+      for (var i = startIndex; i < arr.length; i++) {
+        initial = f(initial, arr[i])
+      }
+      return initial
+    }
+    else {
+      for (var k in arr) {
+        initial = f(initial ? initial : {}, arr[k], k)
+      }
+      return initial
+    }
+
+  }
+  function zip() {
+    function zip() {
+      var res = []
+      var args = Array.from(arguments)
+      for (var i = 0; i < args[0].length; i++) {
+        var temp = []
+        for (var j = 0; j < args.length; j++) {
+          temp.push(args[j][i])
+        }
+        res.push(temp)
+      }
+
+      return res
+
+    }
+
+  }
+
 
 
 
@@ -242,7 +280,7 @@ var lips5476 = function () {
     groupBy: groupBy,
     keyBy: keyBy,
     forEach: forEach,
-    map: map,
+    map: map
 
 
   }
