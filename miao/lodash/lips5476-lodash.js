@@ -30,7 +30,7 @@ var lips5476 = function () {
 
   function compact(arr) {
     for (var i = 0, len = arr.length; i < len; i++) {
-      if (arr[i] == "false" || arr[i] == "" || arr[i] == "NaN") {
+      if (arr[i] == "false" || arr[i] == "" || isNaN(arr[i])) {
         arr.splice(i, 1)
         len--
         i--
@@ -74,11 +74,29 @@ var lips5476 = function () {
     }
     return res
   }
-  function uniqueBy(arr, f = (it) => it) {
 
+  /////////////////////////////////////////////////////////////////////////////////////
+  function uniqueBy(arr, f) {
+    var res = []
+    var obj = {}
+    for (var i = 0; i < arr.length; i++) {
+      var item
+      if (typeof arr[i] == 'object') {
+        item = arr[i][f]
+      }
+      else {
+        item = f(arr[i])
+      }
 
-
-
+      if (item in obj) {
+        continue
+      }
+      else {
+        obj[item] = true
+        res.push(arr[i])
+      }
+    }
+    return res
   }
 
   function flattenDeep(arr) {
@@ -117,8 +135,83 @@ var lips5476 = function () {
     }
     return res
   }
+  /////////////////////////////////////////////////////////////////////////////////////////
+  function groupBy(arr, f) {
+    var obj = {}
+    for (var i = 0; i < arr.length; i++) {
+      var item
+      if (typeof arr[i] == 'number') {
+        item = f(arr[i])
+      }
+      else {
+        item = arr[i][f]
+      }
+      if (item in obj) {
+        obj[item].push(arr[i])
+      }
+      else {
+        obj[item] = [arr[i]]
+      }
+    }
+    return obj
+  }
 
-  function groupBy(arr, f = (it) => it) {
+  function keyBy(arr, f) {
+    var obj = {}
+    for (var i = 0; i < arr.length; i++) {
+      if (typeof f == 'string') {
+        obj[arr[i][f]] = arr[i]
+      }
+      else {
+        obj[f(arr[i])] = arr[i]
+      }
+    }
+
+    return obj
+
+  }
+
+  function forEach(arr, f) {
+    if (Array.isArray(arr)) {
+      for (var i = 0; i < arr.length; i++) {
+        f(arr[i], i, arr)
+      }
+    }
+    else {
+      for (var k in arr)
+        f(arr[k], k, arr)
+    }
+  }
+
+  function map(arr, f) {
+    if (Array.isArray(arr)) {
+      var res = []
+
+      if (typeof f == 'string') {
+        for (var i = 0; i < arr.length; i++) {
+          res.push(arr[i][f])
+        }
+      }
+      else {
+        for (var i = 0; i < arr.length; i++) {
+          res.push(f(arr[i]))
+        }
+      }
+      return res
+
+    }
+    else {
+      var res = []
+      for (var k in arr) {
+        res.push(f(arr[k]))
+      }
+      return res
+
+    }
+
+  }
+
+  function filter(arr, f) {
 
   }
 
@@ -146,7 +239,10 @@ var lips5476 = function () {
     uniq: uniq,
     flattenDepth: flattenDepth,
     flattenDeep: flattenDeep,
-
+    groupBy: groupBy,
+    keyBy: keyBy,
+    forEach: forEach,
+    map: map,
 
 
   }
