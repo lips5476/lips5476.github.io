@@ -39,8 +39,6 @@ var lips5476 = function () {
     return arr
   }
 
-
-
   function concat(arr) {
     var args = Array.from(arguments).slice(1)
     if (args.length < 2) {
@@ -174,12 +172,12 @@ var lips5476 = function () {
   function forEach(arr, f) {
     if (Array.isArray(arr)) {
       for (var i = 0; i < arr.length; i++) {
-        f(arr[i], i, arr)
+        f(arr[i])
       }
     }
     else {
       for (var k in arr)
-        f(arr[k], k, arr)
+        f(k)
     }
   }
 
@@ -235,22 +233,112 @@ var lips5476 = function () {
 
   }
   function zip() {
-    function zip() {
-      var res = []
-      var args = Array.from(arguments)
-      for (var i = 0; i < args[0].length; i++) {
-        var temp = []
-        for (var j = 0; j < args.length; j++) {
-          temp.push(args[j][i])
-        }
-        res.push(temp)
+    var res = []
+    var args = Array.from(arguments)
+    for (var i = 0; i < args[0].length; i++) {
+      var temp = []
+      for (var j = 0; j < args.length; j++) {
+        temp.push(args[j][i])
       }
-
-      return res
-
+      res.push(temp)
     }
 
+    return res
+
   }
+
+  function unzip(arr) {
+    var res = []
+    for (var i = 0; i < arr[0].length; i++) {
+      var temp = []
+      for (var j = 0; j < arr.length; j++) {
+        temp.push(arr[j][i])
+      }
+      res.push(temp)
+    }
+    return res
+
+  }
+  function keys(obj) {
+    var arr = []
+    if (typeof obj == 'string' || Array.isArray(obj)) {
+      for (var i = 0; i < obj.length; i++) {
+        arr.push(i)
+      }
+    }
+    else {
+      for (var k in obj) {
+        arr.push(k)
+      }
+
+    }
+    return arr
+  }
+  function values(obj) {
+    var arr = []
+    if (typeof obj == 'string' || Array.isArray(obj)) {
+      for (var i = 0; i < obj.length; i++) {
+        arr.push(obj[i])
+      }
+    }
+    else {
+      for (var k in obj) {
+        arr.push(obj[k])
+      }
+
+    }
+    return arr
+  }
+  function sortBy(arr, f = (i) => { i }) {
+
+  }
+
+  function isEqual(a, b) {
+    if (a === b) {   //只是字面量相等
+      return true
+    }
+    var typea = typeof a, typeb = typeof b
+    if (typea !== typeb) {
+      return false
+    }
+    else {
+      if (typeof a == 'object') {
+        if (Array.isArray(a) && !Array.isArray(b) || Array.isArray(b) && !Array.isArray(a)) {
+          return false
+        }
+        else {               //如果同为数组或者对象
+          if (Array.isArray(a)) {
+            if (a.length !== b.length) {
+              return false
+            }
+          }
+          else {
+            var keya = Object.keys(a)
+            var keyb = Object.keys(b)
+            if (keya.length !== keyb.length) {
+              return false
+            }
+          }
+
+          for (var k in a) {
+            if (!(k in b)) {
+              return false
+            }
+            if (!(isEqual(a[k], b[k]))) {
+              return false
+            }
+          }
+          return true
+
+        }
+
+      }
+      else {
+        return false
+      }
+    }
+  }
+
 
 
 
@@ -275,12 +363,23 @@ var lips5476 = function () {
     compact: compact,
     concat: concat,
     uniq: uniq,
+    uniqueBy: uniqueBy,
     flattenDepth: flattenDepth,
     flattenDeep: flattenDeep,
     groupBy: groupBy,
     keyBy: keyBy,
-    forEach: forEach,
-    map: map
+    forEach: forEach,////////////
+    filter: filter,///////////////
+    map: map,///////////////
+    reduce: reduce,/////////////
+    zip: zip,
+    unzip: unzip,
+    keys: keys,
+    values: values,
+    sortBy: sortBy,////////////
+    isEqual: isEqual//////
+
+
 
 
   }
