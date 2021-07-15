@@ -392,13 +392,14 @@ var lips5476 = function () {
     return arr
   }
   function isNaN(val) {
-    if (val !== val) {
+
+    if ((val !== val) || (typeof val == 'object')) {
       return true;
     }
     return false;
   }
   function isNull(val) {
-    if (!val && typeof val === 'undefined' && val != 0) {
+    if (!val && typeof val !== 'undefined' && val != 0) {
       return true
     }
     return false
@@ -414,7 +415,7 @@ var lips5476 = function () {
   }
 
   function isNil(val) {
-    if ((!val && typeof val === 'undefined' && val != 0) || (typeof val === 'undefined')) {
+    if ((!val && typeof val !== 'undefined' && val != 0) || (typeof val === 'undefined')) {
       return true
     }
     return false
