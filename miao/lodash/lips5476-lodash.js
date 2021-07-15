@@ -261,7 +261,7 @@ var lips5476 = function () {
   }
   function keys(obj) {
     var arr = []
-    if (typeof obj == 'string' || Array.isArray(obj)) {
+    if (Array.isArray(obj)) {
       for (var i = 0; i < obj.length; i++) {
         arr.push(i)
       }
