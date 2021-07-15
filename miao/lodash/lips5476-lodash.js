@@ -338,6 +338,121 @@ var lips5476 = function () {
       }
     }
   }
+  function fill(arr, content, start = 0, end = array.length) {
+    for (var i = start; i < end; i++) {
+      arr[i] == content
+    }
+    return arr
+  }
+  function reverse(arr) {
+    for (var i = 0; i < arr.length / 2; i++) {
+      var temp = arr[i]
+      arr[i] = arr[arr.length - i - 1]
+      arr[arr.length - i - 1] = temp
+    }
+    return arr
+
+  }
+  function countBy(arr, f) {
+    var res = {}
+    if (typeof f == 'function') {
+      for (var i = 0; i < arr.length; i++) {
+        item = f(arr[i])
+        if (!(item in res)) {
+          res[item] = 0
+          res[item] += 1
+        } else {
+          res[item] += 1
+        }
+      }
+    }
+    else {
+      for (var i = 0; i < arr.length; i++) {
+        item = arr[i][f]
+        if (!(item in res)) {
+          res[item] = 0
+          res[item] += 1
+        } else {
+          res[item] += 1
+        }
+      }
+    }
+
+    return res
+  }
+  function shuffle(arr, size = arr.length) {
+    lastIndex = arr.length - 1;
+    for (var i = 0; i < size; i++) {
+      var rand = Math.floor(Math.random() * (lastIndex - i + 1)) + i
+      var temp = arr[rand]
+      arr[rand] = arr[i]
+      arr[i] = temp
+    }
+    arr.length = size
+    return arr
+  }
+  function isNaN(val) {
+    if (val !== val) {
+      return true;
+    }
+    return false;
+  }
+  function isNull(val) {
+    if (!val && typeof val === 'undefined' && val != 0) {
+      return true
+    }
+    return false
+
+  }
+
+  function isUndefined(val) {
+    if (typeof val === 'undefined') {
+      return true
+    }
+    return false
+
+  }
+
+  function isNil(val) {
+    if ((!val && typeof val === 'undefined' && val != 0) || (typeof val === 'undefined')) {
+      return true
+    }
+    return false
+  }
+
+  function toArray(val) {
+    var res = []
+    if ((typeof val === 'object') || (typeof val === 'string')) {
+      for (var k in res) {
+        res.push(val[k])
+      }
+    }
+    return res
+  }
+  function sum(arr) {
+    var sum = 0
+    for (var i = 0; i < arr.length; i++) {
+      sum += arr[i]
+    }
+    return sum
+
+  }
+
+  function sumBy(arr, f) {
+    var sum = 0
+    if (typeof f === 'function') {
+      for (var i = 0; i < arr.length; i++) {
+        sum += f(arr[i])
+      }
+    }
+    else {
+      for (var i = 0; i < arr.length; i++) {
+        sum += arr[i][f]
+      }
+    }
+    return sum
+
+  }
 
 
 
@@ -368,16 +483,28 @@ var lips5476 = function () {
     flattenDeep: flattenDeep,
     groupBy: groupBy,
     keyBy: keyBy,
-    forEach: forEach,////////////
-    filter: filter,///////////////
-    map: map,///////////////
-    reduce: reduce,/////////////
+    //forEach: forEach,////////////
+    //filter: filter,///////////////
+    //map: map,///////////////
+    //reduce: reduce,/////////////
     zip: zip,
     unzip: unzip,
     keys: keys,
     values: values,
-    sortBy: sortBy,////////////
-    isEqual: isEqual//////
+    //sortBy: sortBy,////////////
+    isEqual: isEqual,//////
+    fill: fill,
+    reverse: reverse,
+    countBy: countBy,
+    shuffle: shuffle,
+    isNaN: isNaN,
+    isNull: isNull,
+    isNil: isNil,
+    isUndefined: isUndefined,
+    toArray: toArray,
+    sum: sum,
+    sumBy: sumBy,
+
 
 
 
