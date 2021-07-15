@@ -424,7 +424,7 @@ var lips5476 = function () {
   function toArray(val) {
     var res = []
     if ((typeof val === 'object') || (typeof val === 'string')) {
-      for (var k in res) {
+      for (var k in val) {
         res.push(val[k])
       }
     }
