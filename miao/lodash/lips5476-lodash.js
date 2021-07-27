@@ -16,6 +16,144 @@
 
 
 var lips5476 = function () {
+
+
+  function get(object, path, defaultVal = undefined) {
+    path = toPath(path)
+    for (var i = 0; i < path.length; i++) {
+      if (object == undefined) {
+        return defaultVal
+      } else {
+        object = object[path[i]]
+      }
+    }
+    return object
+  }
+
+
+  function toPath(val) {    //'a[0].b.c[0][3][4].foo.bar'
+    if (Array.isArray(val)) {
+      return val
+    }
+    else {
+      return val.split('][')
+        .reduce((ary, it) => ary.concat(it.split('].')), [])
+        .reduce((ary, it) => ary.concat(it.split('[')), [])
+        .reduce((ary, it) => ary.concat(it.split('.')), [])
+    }
+  }
+
+  function bind(f, thisArgs, ...fixedArgs) {    //bind(f,{},1,2,_,3,_,4)
+    return function (...args) {
+      var ary = fixedArgs.slice()    //将  1,2,_,3,_,4复制一份给ary
+      var j = 0
+      for (var i = 0; i < ary.length; i++) {   //循环遍历ary 
+        if (Object.is(ary[i], bind.placeholder)) {   //若发现ary有哪一个是_
+          if (j < args.length) {   //发现是_并且若传入的绑定的实际参数数组还没被遍历完的时候
+            ary[i] = args[j++]   //使_的元素按照传入的绑定的实际参数数组的顺序赋值为指定参数
+          }
+          else {
+            ary[i] = undefined   //如果_还有剩余但是传入的绑定的实参个数用完了  那多出来的_赋为undefined
+          }
+        }
+      }
+
+      while (j < args.length) {  //如果_没了但是传入的绑定的实参个数还有的多  那多出来的实参push进ary
+        ary.push(args[j++])
+      }
+      return f.apply(thisArgs, ary)
+    }
+  }
+  bind.placeholder = window
+
+
+
+
+  function isMatch(object, source) {
+    if (object == source) {
+      true
+    }
+    if (typeof object !== 'object' || typeof source !== 'object') {
+      return false
+    }
+    for (var key in source) {
+      if (source[key] && typeof source !== 'object') {
+        if (obj[key] !== source[key]) {
+          return false
+        }
+      }
+      else {
+        if (isMatch(obj[key]) !== isMatch(source[key])) {
+          return false
+        }
+      }
+    }
+    return true
+
+  }
+
+  function property(prop) {
+    // 这个函数传入一个属性名    用来返回一个匿名函数  
+    // 这个匿名函数用来得到
+    // 根据传入的属性名从原本的对象中得到对应的属性值
+    return get.bind(null, _, prop)
+  }
+
+  function matches(src) {
+    // 这个函数传入一个对象    用来返回一个匿名函数  
+    // 这个匿名函数用来得到
+    // 根据传入的条件对象从原本的对象中得知条件对象中的key对应的值和原本对象中同一个key得到的值是否相同
+    // 相同返回true  不同false
+    // ***即判断传入的src是不是原obj的子集
+    // return bind(isMatch, null, window, src)
+    return function (obj) {
+      return isMatch(obj, src)
+    }
+  }
+
+  function matchesProperty(path, val) {
+    return function (obj) {
+      return isEqual(get(obj, path), val)
+    }
+  }
+
+  function iteratee(maybePredicate) {
+    if (typeof maybePredicate === 'function') {
+      return maybePredicate
+    }
+
+    if (typeof maybePredicate === 'string') {
+      return property(maybePredicate)
+    }
+    if (Array.isArray(maybePredicate)) {
+      return matches(...maybePredicate)
+    }
+    if (typeof maybePredicate === 'object') {
+      return matchesProperty(maybePredicate)
+    }
+  }
+
+
+  function map(collection, mapper) {
+    mapper = iteratee(mapper)
+    var res = []
+    for (var key in collection) {
+      res.push(mapper(collection[key], key, ary))
+    }
+    return res
+  }
+
+  function filter(collection, predicate) {
+    predicate = iteratee(predicate)
+    var res = []
+    for (var key in collection) {
+      if (predicate(collection[key], key, collection) === true) {
+        res.push(collection[key])
+      }
+    }
+
+  }
+
   function chunk(arr, num) {
     var res = []
     for (var i = 0; i < arr.length; i += num) {
@@ -181,37 +319,9 @@ var lips5476 = function () {
     }
   }
 
-  function map(arr, f) {
-    if (Array.isArray(arr)) {
-      var res = []
 
-      if (typeof f == 'string') {
-        for (var i = 0; i < arr.length; i++) {
-          res.push(arr[i][f])
-        }
-      }
-      else {
-        for (var i = 0; i < arr.length; i++) {
-          res.push(f(arr[i]))
-        }
-      }
-      return res
 
-    }
-    else {
-      var res = []
-      for (var k in arr) {
-        res.push(f(arr[k]))
-      }
-      return res
 
-    }
-
-  }
-
-  function filter(arr, f) {
-
-  }
   function reduce(arr, f, initial) {
     if (Array.isArray(arr)) {
       var startIndex = 0
@@ -441,15 +551,8 @@ var lips5476 = function () {
 
   function sumBy(arr, f) {
     var sum = 0
-    if (typeof f === 'function') {
-      for (var i = 0; i < arr.length; i++) {
-        sum += f(arr[i])
-      }
-    }
-    else {
-      for (var i = 0; i < arr.length; i++) {
-        sum += arr[i][f]
-      }
+    for (var i = 0; i < arr.length; i++) {
+      sum += f(arr[i])
     }
     return sum
 
@@ -485,8 +588,8 @@ var lips5476 = function () {
     groupBy: groupBy,
     keyBy: keyBy,
     //forEach: forEach,////////////
-    //filter: filter,///////////////
-    //map: map,///////////////
+    filter: filter,///////////////
+    map: map,///////////////
     //reduce: reduce,/////////////
     zip: zip,
     unzip: unzip,
