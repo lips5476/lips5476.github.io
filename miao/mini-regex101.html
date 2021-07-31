@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    input[type="text"],
+    textarea {
+      width: 300px;
+    }
+
+    label {
+      font-family: monospace;
+      cursor: pointer;
+    }
+
+    label input {
+      cursor: pointer;
+    }
+
+    em {
+      background-color: #9fcfff;
+      font-style: normal;
+    }
+
+    em:nth-child(even) {
+      background-color: #d5ebff;
+    }
+
+    em:empty {
+      border-right: 1px dotted red;
+      background-color: transparent;
+      margin-right: -1px;
+    }
+
+    pre {
+      white-space: pre;
+    }
+
+    section {
+      width: 300px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    section pre {
+      color: transparent;
+      top: 0;
+      position: absolute;
+      overflow-wrap: break-word;
+      overflow: scroll;
+    }
+
+    section textarea,
+    section pre {
+      line-height: 1.3;
+      display: block;
+      padding: 5px;
+      width: 100%;
+      height: 100%;
+      border: 2px solid;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: consolas;
+      font-size: 16px;
+      white-space: pre-wrap;
+      overflow-y: scroll;
+      overflow-x: hidden;
+
+    }
+
+
+    section textarea {
+      position: relative;
+      z-index: 8;
+      background-color: transparent;
+    }
+
+    p {
+      margin: 0;
+      height: 1.5em;
+      color: red;
+    }
+
+
+
+    section
+  </style>
+</head>
+
+<body>
+
+  请输入正则表达式:
+  <label><input type="checkbox" onclick="run()" id="ignoreCase">i</label>
+  <label><input type="checkbox" checked onclick="run()" id="global">g</label>
+  <label><input type="checkbox" onclick="run()" id="multiline">m</label>
+  <br>
+  <input type="text" id="reg" value="fo." onkeyup="run()"><br>
+  <p id="regError"></p>
+  请输入内容:<br>
+  <section>
+    <pre id="result"></pre>
+    <textarea onscroll="setScroll()" id="strInput" onkeyup="run();setScroll()" style="height: 200px;"
+      spellcheck="false">foobar baz dakndkanjsdbsdlkgmlsdfojknfkjbdfjbbfofjfod d</textarea>
+
+  </section>
+
+  <script>
+    run()
+    function setScroll() {
+      result.scrollTop = strInput.scrollTop
+    }
+    function run() {
+      var regSource = reg.value
+      var flags = getFlags()
+      if (regSource == "") {
+        result.innerHTML = ""
+        regError.innerHTML = '请输入合法的正则表达式'
+        return
+      }
+      try {
+        var re = new RegExp(regSource, flags)
+        regError.innerHTML = ''
+      } catch (e) {
+        regError.innerHTML = e.message
+        result.innerHTML = ''
+        return
+      }
+
+      var str = strInput.value
+
+      console.log(re)
+      var match
+      if (re.global) {       //如果没有global   while循环出来match  re.exec(str)匹配的始终为第一个字符 就会死循环
+        var resultHTML = ''
+        var lastIndex = re.lastIndex
+        while (match = re.exec(str)) {
+          console.log(match)
+          resultHTML += str.slice(lastIndex, match.index)  //这一部分拼接的是没有被正则匹配到的内容
+          resultHTML += '<em>' + match[0] + '</em>'   //这一部分拼接的是被正则匹配到的内容
+          lastIndex = re.lastIndex  //更新一下lastIndex
+          if (match[0] == '') {
+            re.lastIndex++
+          }
+        }
+        resultHTML += str.slice(lastIndex)
+        result.innerHTML = resultHTML
+      }
+      else {
+        var resultHTML = ''
+        match = re.exec(str)
+        resultHTML += str.slice(0, match.index);
+        resultHTML += '<em>' + match[0] + '</em>'
+        resultHTML += str.slice(match[0].length + match.index)
+        result.innerHTML = resultHTML
+      }
+    }
+
+    function getFlags() {
+      var flags = ''
+      if (ignoreCase.checked) {
+        flags += 'i'
+      }
+      if (global.checked) {
+        flags += 'g'
+      }
+      if (multiline.checked) {
+        flags += 'm'
+      }
+      return flags
+    }
+  </script>
+
+</body>
+
+</html>

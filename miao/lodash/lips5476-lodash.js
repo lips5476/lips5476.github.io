@@ -212,24 +212,15 @@ var lips5476 = function () {
   }
 
   /////////////////////////////////////////////////////////////////////////////////////
-  function uniqueBy(arr, f) {
+  function uniqueBy(arr, predicate) {
+    iteratee(predicate)
     var res = []
-    var obj = {}
+    var seen = new Set()
     for (var i = 0; i < arr.length; i++) {
-      var item
-      if (typeof arr[i] == 'object') {
-        item = arr[i][f]
-      }
-      else {
-        item = f(arr[i])
-      }
-
-      if (item in obj) {
-        continue
-      }
-      else {
-        obj[item] = true
+      var computed = predicate(arr[i], i, arr)
+      if (!seen.includes[computed]) {
         res.push(arr[i])
+        seen.add(computed)
       }
     }
     return res
@@ -307,15 +298,10 @@ var lips5476 = function () {
 
   }
 
-  function forEach(arr, f) {
-    if (Array.isArray(arr)) {
-      for (var i = 0; i < arr.length; i++) {
-        f(arr[i])
-      }
-    }
-    else {
-      for (var k in arr)
-        f(k)
+  function forEach(collection, predicate) {
+    predicate = iteratee(predicate)
+    for (var key in collection) {
+      predicate(collection[key], key, collection)
     }
   }
 
@@ -541,18 +527,15 @@ var lips5476 = function () {
     return res
   }
   function sum(arr) {
-    var sum = 0
-    for (var i = 0; i < arr.length; i++) {
-      sum += arr[i]
-    }
-    return sum
+    return sumBy(ary)
 
   }
 
-  function sumBy(arr, f) {
+  function sumBy(arr, predicate = it => it) {
+    iteratee(predicate)
     var sum = 0
     for (var i = 0; i < arr.length; i++) {
-      sum += f(arr[i])
+      sum += iteratee(arr[i])
     }
     return sum
 
