@@ -98,12 +98,12 @@
   <label><input type="checkbox" checked onclick="run()" id="global">g</label>
   <label><input type="checkbox" onclick="run()" id="multiline">m</label>
   <br>
-  <input type="text" id="reg" value="fo." onkeyup="run()"><br>
+  <input type="text" id="reg" value="fo." onkeydown="run()"><br>
   <p id="regError"></p>
   请输入内容:<br>
   <section>
     <pre id="result"></pre>
-    <textarea onscroll="setScroll()" id="strInput" onkeyup="run();setScroll()" style="height: 200px;"
+    <textarea onscroll="setScroll()" id="strInput" onkeydown="run();setScroll()" style="height: 200px;"
       spellcheck="false">foobar baz dakndkanjsdbsdlkgmlsdfojknfkjbdfjbbfofjfod d</textarea>
 
   </section>

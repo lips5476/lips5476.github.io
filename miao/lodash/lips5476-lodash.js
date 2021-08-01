@@ -434,7 +434,7 @@ var lips5476 = function () {
       }
     }
   }
-  function fill(arr, content, start = 0, end = array.length) {
+  function fill(arr, content, start = 0, end = arr.length) {
     for (var i = start; i < end; i++) {
       arr[i] == content
     }
