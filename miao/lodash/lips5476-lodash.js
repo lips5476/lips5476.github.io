@@ -304,6 +304,7 @@ var lips5476 = function () {
     for (var key in collection) {
       predicate(collection[key], key, collection)
     }
+    return collection
   }
 
 
