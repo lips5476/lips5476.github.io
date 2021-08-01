@@ -482,8 +482,7 @@ var lips5476 = function () {
     return arr
   }
   function isNaN(val) {
-
-    if ((val !== val) || (typeof val == 'object')) {
+    if ((val !== val) || (typeof val == 'object' && val.__proto__.constructor.name == "Number")) {
       return true;
     }
     return false;
@@ -506,6 +505,9 @@ var lips5476 = function () {
 
   function isNil(val) {
     if ((!val && typeof val !== 'undefined' && val != 0) || (typeof val === 'undefined')) {
+      if (val !== val) {
+        return false
+      }
       return true
     }
     return false
@@ -521,18 +523,17 @@ var lips5476 = function () {
     return res
   }
   function sum(arr) {
-    return sumBy(ary)
+    return sumBy(arr)
 
   }
 
   function sumBy(arr, predicate = it => it) {
-    iteratee(predicate)
+    predicate = iteratee(predicate)
     var sum = 0
     for (var i = 0; i < arr.length; i++) {
-      sum += iteratee(arr[i])
+      sum += predicate(arr[i])
     }
     return sum
-
   }
 
 
