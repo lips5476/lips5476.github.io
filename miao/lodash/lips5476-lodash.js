@@ -96,7 +96,9 @@ var lips5476 = function () {
     // 这个函数传入一个属性名    用来返回一个匿名函数  
     // 这个匿名函数用来得到
     // 根据传入的属性名从原本的对象中得到对应的属性值
-    return get.bind(null, _, prop)
+    return function (obj) {
+      return obj[prop]
+    }
   }
 
   function matches(src) {
