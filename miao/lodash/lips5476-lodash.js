@@ -151,6 +151,7 @@ var lips5476 = function () {
         res.push(collection[key])
       }
     }
+    return res
 
   }
 
