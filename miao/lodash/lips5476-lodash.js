@@ -138,7 +138,7 @@ var lips5476 = function () {
     mapper = iteratee(mapper)
     var res = []
     for (var key in collection) {
-      res.push(mapper(collection[key], key, ary))
+      res.push(mapper(collection[key], key, collection))
     }
     return res
   }
@@ -309,25 +309,16 @@ var lips5476 = function () {
 
 
 
-  function reduce(arr, f, initial) {
-    if (Array.isArray(arr)) {
-      var startIndex = 0
-      if (arguments.length == 2) {
-        initial = arr[0];
-        startIndex = 1
-      }
-      for (var i = startIndex; i < arr.length; i++) {
-        initial = f(initial, arr[i])
-      }
-      return initial
+  function reduce(collection, predicate, initial) {
+    predicate = iteratee(predicate)
+    startIdx = 0
+    if (arguments.length == 2) {
+      initial = arr[0], startIdx = 1
     }
-    else {
-      for (var k in arr) {
-        initial = f(initial ? initial : {}, arr[k], k)
-      }
-      return initial
+    for (var i = startIdx; i < collection.length; i++) {
+      initial = predicate(initial, collection[i])
     }
-
+    return initial
   }
   function zip() {
     var res = []
@@ -386,7 +377,9 @@ var lips5476 = function () {
     }
     return arr
   }
-  function sortBy(arr, f = (i) => { i }) {
+  function sortBy(arr, predicate) {
+
+
 
   }
 
@@ -571,15 +564,15 @@ var lips5476 = function () {
     flattenDeep: flattenDeep,
     groupBy: groupBy,
     keyBy: keyBy,
-    //forEach: forEach,////////////
+    forEach: forEach,////////////
     filter: filter,///////////////
     map: map,///////////////
-    //reduce: reduce,/////////////
+    reduce: reduce,/////////////
     zip: zip,
     unzip: unzip,
     keys: keys,
     values: values,
-    //sortBy: sortBy,////////////
+    sortBy: sortBy,////////////
     isEqual: isEqual,//////
     fill: fill,
     reverse: reverse,
