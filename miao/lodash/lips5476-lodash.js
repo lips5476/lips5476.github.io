@@ -93,9 +93,6 @@ var lips5476 = function () {
   }
 
   function property(prop) {
-    // 这个函数传入一个属性名    用来返回一个匿名函数  
-    // 这个匿名函数用来得到
-    // 根据传入的属性名从原本的对象中得到对应的属性值
     return function (obj) {
       return obj[prop]
     }
@@ -109,13 +106,20 @@ var lips5476 = function () {
     // ***即判断传入的src是不是原obj的子集
     // return bind(isMatch, null, window, src)
     return function (obj) {
-      return isMatch(obj, src)
+      for (var key in obj) {
+        if (obj[key] !== sc[key]) {
+          return false
+        }
+      }
+      return true
     }
   }
 
-  function matchesProperty(path, val) {
+  function matchesProperty(ary) {
+    var key = ary[0]
+    var val = ary[1]
     return function (obj) {
-      return isEqual(get(obj, path), val)
+      return obj[key] == val
     }
   }
 
@@ -316,7 +320,7 @@ var lips5476 = function () {
     predicate = iteratee(predicate)
     startIdx = 0
     if (arguments.length == 2) {
-      initial = arr[0], startIdx = 1
+      initial = collection[0], startIdx = 1
     }
     for (var i = startIdx; i < collection.length; i++) {
       initial = predicate(initial, collection[i])
