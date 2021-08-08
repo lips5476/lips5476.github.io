@@ -105,9 +105,9 @@ var lips5476 = function () {
     // 相同返回true  不同false
     // ***即判断传入的src是不是原obj的子集
     // return bind(isMatch, null, window, src)
-    return function (obj) {
+    return function (src) {
       for (var key in obj) {
-        if (obj[key] !== sc[key]) {
+        if (obj[key] !== src[key]) {
           return false
         }
       }
@@ -127,7 +127,6 @@ var lips5476 = function () {
     if (typeof maybePredicate === 'function') {
       return maybePredicate
     }
-
     if (typeof maybePredicate === 'string') {
       return property(maybePredicate)
     }
@@ -542,9 +541,145 @@ var lips5476 = function () {
     }
     return sum
   }
+  function difference(arr1, arr2) {
+    var res = []
+    if (arr1.length > arr2.length) {
+      for (var i = 0; i < arr2.length; i++) {
+        if (arr1[i] !== arr2[i]) {
+          res.push(arr1[i])
+        }
+      }
+      res.push(...arr1.slice(arr2.length))
+    }
+    else if (arr1.length < arr2.length) {
+      for (var i = 0; i < arr1.length; i++) {
+        if (arr1[i] !== arr2[i]) {
+          res.push(arr1[i])
+        }
+      }
+      res.push(...arr2.slice(arr1.length))
+    }
+    else {
+      for (var i = 0; i < arr2.length; i++) {
+        if (arr1[i] !== arr2[i]) {
+          res.push(arr1[i])
+        }
+      }
+    }
+    return res
+  }
 
+  function differenceBy(arr1, arr2, predicate) {
+    predicate = iteratee(predicate)
+    var res = []
 
+    var Newarr1 = arr1.map((it) => predicate(it))
+    var Newarr2 = arr2.map((it) => predicate(it))
+    if (Newarr1.length >= Newarr2.length) {
+      for (var i = 0; i < Newarr1.length; i++) {
+        if (!(Newarr2.includes(Newarr1[i]))) {
+          res.push(arr1[i])
+        }
+      }
+    }
+    if (Newarr1.length < Newarr2.length) {
+      for (var i = 0; i < Newarr1.length; i++) {
+        if (!(Newarr1.includes(Newarr2[i]))) {
+          res.push(arr2[i])
+        }
+      }
+    }
+    return res
+  }
+  function isEmpty(val) {
+    if (typeof val == 'boolean' || typeof val == 'undefined' || val !== val || typeof val == 'number' || val == null) {
+      return true
+    }
+    else {
+      if (typeof val == 'object') {
+        if (Array.isArray(val)) {
+          if (val.length > 0) {
+            return false
+          }
+          else {
+            return true
+          }
+        }
+        else {
+          if (Object.keys(val).length > 0) {
+            return false
+          } else {
+            return true
+          }
+        }
+      }
+    }
+  }
 
+  function isElement(val) {
+    if (val.nodeType !== undefined) {
+      return true
+    }
+    else {
+      return false
+    }
+  }
+
+  function drop(arr, n = 1) {
+    var res = arr.slice(n)
+    return res
+
+  }
+  function dropRight(arr, n = 1) {
+    return arr.slice(0, arr.length - n <= 0 ? 0 : arr.length - n)
+
+  }
+
+  function dropWhile(arr, predicate) {
+
+  }
+  function head(arr) {
+    return arr[0]
+  }
+  function last(arr) {
+    return arr[arr.length - 1]
+  }
+  function indexOf(arr, val, fromIndex = 0) {
+    for (var i = fromIndex; i < arr.length; i++) {
+      if (arr[i] == val) {
+        return i
+      }
+    }
+    return -1
+
+  }
+
+  function lastIndexOf(arr, val, fromIndex = array.length - 1) {
+    for (var i = fromIndex; i >= 0; i--) {
+      if (arr[i] == val) {
+        return i
+      }
+    }
+    return -1
+
+  }
+  function join(array, separator = ',') {
+    var res = ''
+    for (var i = 0; i < array.length; i++) {
+      if (i == array.length - 1) {
+        res += array[i]
+      }
+      else {
+        res += array[i] + separator
+      }
+    }
+    return res
+  }
+
+  function initial(arr) {
+    return arr.slice(0, arr.length - 1)
+
+  }
 
 
 
@@ -593,7 +728,22 @@ var lips5476 = function () {
     toArray: toArray,
     sum: sum,
     sumBy: sumBy,
-
+    difference: difference,
+    differenceBy: differenceBy,
+    isEmpty: isEmpty,
+    isElement: isElement,
+    dropRight: dropRight,
+    drop: drop,
+    // dropWhile: dropWhile,
+    fromPairs: fromPairs,
+    head: head,
+    indexOf: indexOf,
+    initial: initial,
+    join: join,
+    last: last,
+    lastIndexOf: lastIndexOf,
+    findIndex: findIndex,
+    findLastIndex: findLastIndex
 
 
 
