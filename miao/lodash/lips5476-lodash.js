@@ -722,16 +722,16 @@ var lips5476 = function () {
     isElement: isElement,
     dropRight: dropRight,
     drop: drop,
-    fromPairs: fromPairs,
+    // fromPairs: fromPairs,
     head: head,
     indexOf: indexOf,
     initial: initial,
     join: join,
     last: last,
     lastIndexOf: lastIndexOf,
-    findIndex: findIndex,
-    findLastIndex: findLastIndex,
-    isArray: isArray
+    // findIndex: findIndex,
+    // findLastIndex: findLastIndex,
+    // isArray: isArray
 
 
 
