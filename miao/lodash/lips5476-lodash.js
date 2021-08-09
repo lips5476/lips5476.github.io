@@ -568,11 +568,9 @@ var lips5476 = function () {
     }
     return res
   }
-
   function differenceBy(arr1, arr2, predicate) {
     predicate = iteratee(predicate)
     var res = []
-
     var Newarr1 = arr1.map((it) => predicate(it))
     var Newarr2 = arr2.map((it) => predicate(it))
     if (Newarr1.length >= Newarr2.length) {
@@ -632,12 +630,8 @@ var lips5476 = function () {
   }
   function dropRight(arr, n = 1) {
     return arr.slice(0, arr.length - n <= 0 ? 0 : arr.length - n)
-
   }
 
-  function dropWhile(arr, predicate) {
-
-  }
   function head(arr) {
     return arr[0]
   }
@@ -651,7 +645,6 @@ var lips5476 = function () {
       }
     }
     return -1
-
   }
 
   function lastIndexOf(arr, val, fromIndex = array.length - 1) {
@@ -743,7 +736,8 @@ var lips5476 = function () {
     last: last,
     lastIndexOf: lastIndexOf,
     findIndex: findIndex,
-    findLastIndex: findLastIndex
+    findLastIndex: findLastIndex,
+    isArray: isArray
 
 
 
