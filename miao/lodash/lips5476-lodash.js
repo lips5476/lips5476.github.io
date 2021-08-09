@@ -131,10 +131,10 @@ var lips5476 = function () {
       return property(maybePredicate)
     }
     if (Array.isArray(maybePredicate)) {
-      return matches(...maybePredicate)
+      return matchesProperty(...maybePredicate)
     }
     if (typeof maybePredicate === 'object') {
-      return matchesProperty(maybePredicate)
+      return matches(maybePredicate)
     }
   }
 
@@ -311,9 +311,6 @@ var lips5476 = function () {
     }
     return collection
   }
-
-
-
 
   function reduce(collection, predicate, initial) {
     predicate = iteratee(predicate)
@@ -654,7 +651,6 @@ var lips5476 = function () {
       }
     }
     return -1
-
   }
   function join(array, separator = ',') {
     var res = ''
@@ -671,7 +667,6 @@ var lips5476 = function () {
 
   function initial(arr) {
     return arr.slice(0, arr.length - 1)
-
   }
 
 
@@ -727,7 +722,6 @@ var lips5476 = function () {
     isElement: isElement,
     dropRight: dropRight,
     drop: drop,
-    // dropWhile: dropWhile,
     fromPairs: fromPairs,
     head: head,
     indexOf: indexOf,
