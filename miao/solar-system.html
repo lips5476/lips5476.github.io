@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #sun,
+    #earth,
+    #moon {
+      position: absolute;
+      border-radius: 99999px;
+      background-color: red;
+      width: 50px;
+      height: 50px;
+    }
+
+    #earth {
+      background-color: greenyellow;
+      width: 30px;
+      height: 30px;
+    }
+
+    #moon {
+      background-color: orange;
+      width: 10px;
+      height: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="sun"></div>
+  <div id="earth"></div>
+  <div id="moon"></div>
+
+  <script>
+    function animate(time) {
+      angle1 = time * 0.0003
+      angle2 = time * 0.001
+      angle3 = time * 0.004
+      var x1 = Math.cos(angle1) * 200 + 250 - 25
+      var y1 = Math.sin(angle1) * 200 + 250 - 25
+      sun.style.top = x1 + 'px'
+      sun.style.left = y1 + 'px'
+      var x2 = Math.cos(angle2) * 150 + x1 + 25 - 15
+      var y2 = Math.sin(angle2) * 150 + y1 + 25 - 15
+      earth.style.top = x2 + 'px'
+      earth.style.left = y2 + 'px'
+
+      var x3 = Math.cos(angle3) * 50 + x2 + 15 - 5
+      var y3 = Math.sin(angle3) * 50 + y2 + 15 - 5
+      moon.style.top = x3 + 'px'
+      moon.style.left = y3 + 'px'
+      requestAnimationFrame(animate)
+
+    }
+
+
+
+    requestAnimationFrame(animate)
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>
