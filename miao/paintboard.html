@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background-color: pink;
+      position: absolute;
+    }
+
+    svg {
+      border: 1px solid red;
+      margin: 50px;
+      margin-left: 300px;
+
+    }
+  </style>
+</head>
+
+<body>
+  <svg width="500" height="500 "> </svg>
+
+  <input type="color" name="" id="colorInput">
+  <input type="range" min="1" max="5" value="1" id="rangeInput" step="1">
+  <button onclick="tool='line'">矩形</button><button onclick="tool='circle'">圆</button>
+
+
+  <script>
+    var lastPos = null
+    var tool = 'line'
+    var svg = document.querySelector('svg')
+    document.addEventListener('mousedown', function () {
+      if (tool == 'line') {
+        var pos = mousepos(svg)
+        var polyline = document.createElementNS('http://www.w3.org/2000/svg', 'polyline')
+        polyline.setAttribute('stroke', colorInput.value)
+        polyline.setAttribute('fill', 'none')
+        polyline.setAttribute('stroke-width', rangeInput.value)
+        polyline.setAttribute('stroke-linecap', 'round')
+        polyline.setAttribute('stroke-linejoin', 'round')
+        svg.append(polyline)
+        var points = `${pos.x} ${pos.y} `
+        polyline.setAttribute('points', points)
+
+        function draw() {
+          var pos = mousepos(svg)
+          var line = document.createElementNS('http://www.w3.org/2000/svg', 'line')
+          points += `${pos.x} ${pos.y} `
+          polyline.setAttribute('points', points)
+
+          // if (lastPos == null) {
+          //   line.setAttribute('x1', pos.x)
+          //   line.setAttribute('y1', pos.y)
+          // }
+          // else {
+          //   line.setAttribute('x1', lastPos.x)
+          //   line.setAttribute('y1', lastPos.y)
+          // }
+          // line.setAttribute('x2', pos.x)
+          // line.setAttribute('y2', pos.y)
+          // line.setAttribute('stroke', colorInput.value)
+          // line.setAttribute('stroke-width', rangeInput.value)
+          // line.setAttribute('stroke-linecap', 'round')
+          // lastPos = pos
+          // g.append(line)
+        }
+        document.addEventListener('mousemove', draw)
+        document.addEventListener('mouseup', function once() {
+          document.removeEventListener('mousemove', draw)
+          document.removeEventListener('mouseup', once)
+        })
+
+      }
+      if (tool == 'circle') {
+        var ellipse = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse')
+        svg.append(ellipse)
+        ellipse.setAttribute('stroke', colorInput.value)
+        ellipse.setAttribute('fill', 'none')
+        ellipse.setAttribute('stroke-width', rangeInput.value)
+        var startPos = mousepos(svg)
+        function drawEllipse() {
+          var currPos = mousepos(svg)
+          var cx = (startPos.x + currPos.x) / 2    //中心点坐标
+          var cy = (startPos.y + currPos.y) / 2
+          ellipse.setAttribute('cx', cx)
+          ellipse.setAttribute('cy', cy)
+          var rx = Math.abs(startPos.x - currPos.x) / 2    //中心点坐标
+          var ry = Math.abs(startPos.y - currPos.y) / 2
+          ellipse.setAttribute('rx', rx)
+          ellipse.setAttribute('ry', ry)
+        }
+        document.addEventListener('mousemove', drawEllipse)
+        document.addEventListener('mouseup', function once() {
+          document.removeEventListener('mousemove', drawEllipse)
+          document.removeEventListener('mouseup', once)
+        })
+      }
+
+
+
+
+
+    })
+
+
+    document.addEventListener('keydown', function (e) {
+      if (e.ctrlKey && e.key == 'z') {
+        if (svg.lastElementChild) {
+          // var bihua = svg.lastElementChild.dataset.bihua
+          // while (svg.lastElementChild && svg.lastElementChild.dataset.bihua == bihua) {
+          svg.removeChild(svg.lastElementChild)
+          // }
+        }
+      }
+
+    })
+
+    function mousepos(node) {
+      var box = node.getBoundingClientRect()
+      return {
+        x: window.event.clientX - box.x,
+        y: window.event.clientY - box.y
+      }
+    }
+
+
+
+
+  </script>
+
+</body>
+
+</html>

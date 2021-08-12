@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      width: 30px;
+      height: 30px;
+      background-color: skyblue;
+      position: absolute;
+
+    }
+
+    #woman {
+      background-color: pink;
+    }
+  </style>
+</head>
+
+<body>
+  <div id='man' style="top: 50px;left: 50px;"></div>
+
+
+  <div id='woman' style="top: 50px;left: 100px;"></div>
+
+
+  <script>
+    var vx = 0;
+    var vy = 0
+    var womanX = 0
+    var womanY = 0
+    var leftPress = false
+    var rightPress = false
+    var bottomPress = false
+    var topPress = false
+
+    var womanleftPress = false
+    var womanrightPress = false
+    var womanbottomPress = false
+    var womantopPress = false
+
+
+    window.onblur = function () {
+      vx = 0;
+      vy = 0
+      womanX = 0
+      womanY = 0
+    }
+
+
+
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key == 'ArrowRight') {
+        rightPress = true
+        vx = 1
+      }
+      if (e.key == 'ArrowLeft') {
+        leftPress = true
+        vx = -1
+      }
+      if (e.key == 'ArrowUp') {
+        topPress = true
+        vy = -1
+      }
+      if (e.key == 'ArrowDown') {
+        bottomPress = true
+        vy = 1
+      }
+
+
+      if (e.key == 'd') {
+        womanrightPress = true
+        womanX = 1
+      }
+      if (e.key == 'a') {
+        womanleftPress = true
+        womanX = -1
+      }
+      if (e.key == 'w') {
+        womantopPress = true
+        womanY = -1
+      }
+      if (e.key == 's') {
+        womanbottomPress = true
+        womanY = 1
+      }
+    })
+
+    document.addEventListener('keyup', function (e) {
+      if (e.key == 'ArrowRight') {
+        rightPress = false
+        if (leftPress) {
+          vx = -1
+        }
+        else {
+          vx = 0
+        }
+      }
+
+      if (e.key == 'ArrowLeft') {
+        leftPress = false
+        if (rightPress) {
+          vx = 1
+        }
+        else {
+          vx = 0
+        }
+      }
+
+      if (e.key == 'ArrowUp') {
+        topPress = false
+        if (bottomPress) {
+          vy = 1
+        }
+        else {
+          vy = 0
+        }
+      }
+      if (e.key == 'ArrowDown') {
+        bottomPress = false
+        if (topPress) {
+          vy = -1
+        }
+        else {
+          vy = 0
+        }
+      }
+
+
+
+
+      if (e.key == 'd') {
+        womanrightPress = false
+        if (womanleftPress) {
+          womanX = -1
+        }
+        else {
+          womanX = 0
+        }
+      }
+
+      if (e.key == 'a') {
+        womanleftPress = false
+        if (womanrightPress) {
+          womanX = 1
+        }
+        else {
+          womanX = 0
+        }
+      }
+
+      if (e.key == 'w') {
+        womantopPress = false
+        if (womanbottomPress) {
+          womanY = 1
+        }
+        else {
+          womanY = 0
+        }
+      }
+      if (e.key == 's') {
+        womanbottomPress = false
+        if (womantopPress) {
+          womanY = -1
+        }
+        else {
+          womanY = 0
+        }
+      }
+
+
+    })
+    var has
+
+
+
+
+
+    var lastTimeMan = 0
+    requestAnimationFrame(function moveman(time) {
+
+      var timeDiff = time - lastTimeMan
+      lastTimeMan = time
+      man.style.left = parseFloat(man.style.left) + vx * timeDiff * 0.05 + 'px'
+      man.style.top = parseFloat(man.style.top) + vy * timeDiff * 0.05 + 'px'
+      requestAnimationFrame(moveman)
+    })
+
+    var lastTimewoman = 0
+    requestAnimationFrame(function movewoman(time) {
+      var timeDiff = time - lastTimewoman
+      lastTimewoman = time
+      woman.style.left = parseFloat(woman.style.left) + womanX * timeDiff * 0.05 + 'px'
+      woman.style.top = parseFloat(woman.style.top) + womanY * timeDiff * 0.05 + 'px'
+      requestAnimationFrame(movewoman)
+    })
+
+  </script>
+</body>
+
+</html>

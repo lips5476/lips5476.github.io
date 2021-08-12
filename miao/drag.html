@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    section {
+      width: 800px;
+      height: 500px;
+      margin: 100px auto;
+      border: 1px solid red;
+      position: relative;
+    }
+
+    div {
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      transition: background-color .7s;
+    }
+  </style>
+</head>
+
+
+<body>
+  <section>
+    <div id="box1" style="background-color: pink;left: 50px;"></div>
+    <div id="box2" style="background-color: skyblue;left: 100px;"></div>
+    <div id="box3" style="background-color: greenyellow;left: 250px;"></div>
+  </section>
+  <script>
+    var section = document.querySelector('section')
+
+    section.addEventListener('mousedown', function (e) {
+      var _that = this
+      var needX = mousePos(this).x - e.target.offsetLeft
+      var needY = mousePos(this).y - e.target.offsetTop
+      Array.from(this.children).map(it => it.style.zIndex = 0)
+      e.target.style.zIndex = 10
+      function drag() {
+        e.target.style.left = mousePos(_that).x - needX + 'px'
+        e.target.style.top = mousePos(_that).y - needY + 'px'
+        e.target.style.backgroundColor = `rgb(${Math.floor(Math.random() * (255 - 0 + 1) + 0)},${Math.floor(Math.random() * (255 - 0 + 1) + 0)},${Math.floor(Math.random() * (255 - 0 + 1) + 0)})`
+        if (e.target.offsetLeft <= 20) {
+          e.target.style.left = 0 + 'px'
+        }
+        if (e.target.offsetLeft >= 680) {
+          e.target.style.left = 700 + 'px'
+        }
+        if (e.target.offsetTop <= 20) {
+          e.target.style.top = 0 + 'px'
+        }
+        if (e.target.offsetTop >= 380) {
+          e.target.style.top = 400 + 'px'
+        }
+      }
+
+      document.addEventListener('mousemove', e.target == this ? null : drag)
+      document.addEventListener('mouseup', function once() {
+        document.removeEventListener('mousemove', drag)
+        document.removeEventListener('mouseup', once)
+      })
+
+    })
+
+    function mousePos(node) {
+      var box = node.getBoundingClientRect()
+      return {
+        x: window.event.clientX - box.x,
+        y: window.event.clientY - box.y
+      }
+    }
+
+
+
+  </script>
+
+</body>
+
+</html>
