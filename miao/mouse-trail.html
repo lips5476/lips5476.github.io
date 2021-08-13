@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>鼠标图片</title>
+    <style>
+        .fatherBox {
+            width: 100px;
+            height: 100px;
+            background-color: transparent;
+            position: absolute;
+            animation: rotateBox linear 2s infinite;
+        }
+
+
+        #sonBox1 {
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            animation: rotateSonBox linear 2s infinite;
+            background-color: pink;
+            left: 0;
+            top: 0;
+
+
+        }
+
+        #sonBox2 {
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            animation: rotateSonBox linear 2s infinite;
+            background-color: skyblue;
+            left: calc(100% - 20px);
+            top: calc(100% - 20px);
+
+        }
+
+
+
+        @keyframes rotateBox {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+
+        @keyframes rotateSonBox {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(-360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="fatherBox">
+        <div id="sonBox1"></div>
+        <div id="sonBox2"></div>
+        <div id="sonBox3"></div>
+    </div>
+    <!-- 要改为绝对定位 -->
+    <script>
+        var pic = document.querySelector('div');
+        document.addEventListener('mousemove', function (e) {
+            var x = e.pageX;
+            var y = e.pageY;
+            pic.style.left = x - 50 + 'px'; //默认鼠标是在图片的左上角的，想要鼠标在图片的中间可以让图片向上向左移动自身的一半
+            pic.style.top = y - 50 + 'px';
+
+
+        });
+    </script>
+</body>
+
+</html>
