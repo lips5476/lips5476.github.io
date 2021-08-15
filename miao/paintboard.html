@@ -25,18 +25,24 @@
 </head>
 
 <body>
-  <svg width="500" height="500 "> </svg>
+
+  <svg width="800px" height="500px" version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink'
+    xmlns='http://www.w3.org/2000/svg'> </svg>
 
   <input type="color" name="" id="colorInput">
   <input type="range" min="1" max="5" value="1" id="rangeInput" step="1">
   <button onclick="tool='line'">矩形</button><button onclick="tool='circle'">圆</button>
+  <button onclick="saveFile()">保存</button>
 
 
   <script>
     var lastPos = null
     var tool = 'line'
     var svg = document.querySelector('svg')
-    document.addEventListener('mousedown', function () {
+    var drawdonwnNosave = false
+    svg.addEventListener('mousedown', function () {
+      drawdonwnNosave = true
+
       if (tool == 'line') {
         var pos = mousepos(svg)
         var polyline = document.createElementNS('http://www.w3.org/2000/svg', 'polyline')
@@ -130,6 +136,25 @@
       }
     }
 
+
+    window.addEventListener('beforeunload', e => {
+      if (drawdonwnNosave) {
+        return e.returnValue = '还没保存是否退出'
+      }
+    })
+
+
+    function saveFile() {
+      drawdonwnNosave = false
+      var svgSource = svg.outerHTML
+      var blob = new Blob(['<?xml version="1.0" encoding="UTF-8"?>', svgSource], { type: 'image/xml+svg' })
+      var url = URL.createObjectURL(blob)
+      var anchor = document.createElement('a')
+      anchor.href = url
+      anchor.download = 'xxx.svg'
+      anchor.click()
+
+    }
 
 
 

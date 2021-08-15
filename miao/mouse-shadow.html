@@ -7,94 +7,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-    }
+    span.mouse-shadow {
+      width: 5px;
+      height: 5px;
+      background-color: red;
+      border-radius: 999px;
+      position: fixed;
 
-    .box {
-      width: 10px;
-      height: 10px;
-      /* background: green; */
-      position: absolute;
-    }
-
-    .box:nth-of-type(n) {
-      background: red;
-    }
-
-    .box:nth-of-type(2n) {
-      background: green;
-    }
-
-    .box:nth-of-type(3n) {
-      background: yellow;
-    }
-
-    .box:nth-of-type(4n) {
-      background: blue;
-    }
-
-    .box:nth-of-type(5n) {
-      background: pink;
-    }
-
-    .box:nth-of-type(6n) {
-      background: orange;
-    }
-
-    .box:nth-of-type(7n) {
-      background: skyblue;
-    }
-
-    .box:nth-of-type(8n) {
-      background: hotpink;
-    }
-
-    .box:nth-of-type(9n) {
-      background: purple;
-    }
-
-    .box:nth-of-type(10n) {
-      background: gold;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="box"></div>
-  <div class="box"></div>
-  <div class="box"></div>
-  <div class="box"></div>
-  <div class="box"></div>
-  <div class="box"></div>
-  <div class="box"></div>
-  <div class="box"></div>
-  <div class="box"></div>
-  <div class="box"></div>
-
-
   <script>
-    var box = document.querySelectorAll('.box')
-    var timer;
-    document.onmousemove = function (e) {
-      clearInterval(timer);
-      // 设置一个div块跟随鼠标移动
-      box[0].style.top = e.pageY + "px";
-      box[0].style.left = e.pageX + "px";
-      for (var i = box.length - 1; i > 0; i--) {
-        box[i].style.top = box[i - 1].style.top;
-        box[i].style.left = box[i - 1].style.left;
-      }
-      // 设置定时器  每隔一段时间让后面一个div覆盖前面一个div的位置
-      timer = setInterval(function () {
-        for (var i = box.length - 1; i > 0; i--) {
-          box[i].style.top = box[i - 1].style.top;
-          box[i].style.left = box[i - 1].style.left;
-        }
-      }, 50)
-    }
+
+    // addEventListener('mousemove', function (e) {
+    //   var span = document.createElement('span')
+    //   span.classList.add('mouse-shadow')
+
+
+    //   span.style.left = e.clientX + 'px'
+    //   span.style.top = e.clientY + 'px'
+
+    //   document.body.append(span)
+
+
+    //   setTimeout(() => {
+    //     document.body.removeChild(span)
+    //   }, 200)
+
+    // })
+    var x = -999
+    var y = -999
+
+    addEventListener('mousemove', function (e) {
+      x = e.clientX
+      y = e.clientY
+    })
+
+
+
+    requestAnimationFrame(function ani(time) {
+      var span = document.createElement('span')
+      span.classList.add('mouse-shadow')
+      span.style.left = x + 'px'
+      span.style.top = y + 'px'
+      document.body.append(span)
+      setTimeout(() => {
+        document.body.removeChild(span)
+      }, 16 * 8)
+      requestAnimationFrame(ani)
+    })
 
 
 

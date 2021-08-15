@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var last1 = 0
+    var last2 = 0
+    var last3 = 0
+
+    // window.addEventListener('click', function (e) {
+    //   var time = Date.now()
+    //   if (time - last2 < 400 && last2 - last1 > 400) {
+    //     console.log('triple click')
+    //   }
+    //   last1 = last2
+    //   last2 = last3
+    //   last3 = time
+    // })
+
+
+    // var last = 0
+    // var c = 1
+    // var id
+    // window.addEventListener('click', function (e) {
+    //   console.log('click')
+    //   var time = Date.now()
+    //   clearTimeout(id)//如果这次点击完成后时间未超过200ms  表示是连续点击 则下次点击会清除这次的定时器设置的操作c不会为0而会继续计数
+    //   id = setTimeout(() => {
+    //     c = 0
+    //   }, 200) //如果这次点击完成后时间超过200ms 则此定时器执行 使c重置为0   表示的意思是它和下次点击时间间隔超过200ms不是连续点击了
+
+    //   if (time - last < 200) {
+    //     c++
+    //   }
+    //   if (c == 2) {
+    //     console.log('double click')
+    //   }
+    //   if (c == 3) {
+    //     console.log('triple click')
+    //   }
+    //   if (c == 4) {
+    //     console.log('four click')
+    //   }
+
+    //   last = time
+    // })
+
+    // window.addEventListener('click', function (e) {
+    //   console.log(e.detail)     //内置事件可以知道你连续点击了几次
+    // })
+
+    var last = 0
+    var c = 1
+
+    window.addEventListener('click', function (e) {
+      var time = Date.now()
+
+      if (time - last < 200) {
+        c++
+      } else {
+        c = 1
+      }
+      console.log(c)
+
+      last = time
+
+    })
+
+
+
+  </script>
+
+</body>
+
+</html>

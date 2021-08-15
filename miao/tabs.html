@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+
+  </style>
+</head>
+
+<body>
+
+  <div>
+    <div data-tabname="Home">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Delectus dicta corrupti tenetur,
+      ab saepe repellendus aliquam voluptate excepturi at cum quasi </div>
+    <div data-tabname="Link">Lenim dolores? Aliquid, voluptatum nisi. Sint, quasi!consectetur adipisicing elit. Delectus
+      dicta corrupti tenetur,</div>
+    <div data-tabname="About">aliquam voluptate excepturi at cum quasi aut doloribus mollitia dolores, quisquam
+      dignissimos, nisi nihil sapiente.</div>
+  </div>
+  <script>
+
+    function asTbs(node) {
+      var children = Array.from(node.children)
+      var buttons = []
+      for (let child of children.reverse()) {
+        let button = document.createElement('button')
+        button.textContent = child.dataset.tabname
+        buttons.push(button)
+        child.style.display = 'none'
+
+        button.addEventListener('click', function (e) {
+          children.forEach(it => it.style.display = 'none')
+          child.style.display = 'block'
+          buttons.forEach((it) => {
+            it.style.background = ''
+          })
+          button.style.background = 'pink'
+        })
+        node.prepend(button)
+      }
+
+      node.firstElementChild.click()
+
+    }
+
+    asTbs(document.querySelector('body>div'))
+
+
+
+  </script>
+</body>
+
+</html>

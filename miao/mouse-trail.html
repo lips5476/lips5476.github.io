@@ -7,80 +7,49 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>鼠标图片</title>
     <style>
-        .fatherBox {
-            width: 100px;
-            height: 100px;
-            background-color: transparent;
-            position: absolute;
-            animation: rotateBox linear 2s infinite;
-        }
-
-
-        #sonBox1 {
-            width: 20px;
-            height: 20px;
-            position: absolute;
-            animation: rotateSonBox linear 2s infinite;
-            background-color: pink;
-            left: 0;
-            top: 0;
-
-
-        }
-
-        #sonBox2 {
-            width: 20px;
-            height: 20px;
-            position: absolute;
-            animation: rotateSonBox linear 2s infinite;
-            background-color: skyblue;
-            left: calc(100% - 20px);
-            top: calc(100% - 20px);
-
-        }
-
-
-
-        @keyframes rotateBox {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-
-        @keyframes rotateSonBox {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(-360deg);
-            }
+        div {
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            /**这里注意一定得是fixed不能是absolute否则出现滚动条的时候会出现问题**/
+            position: fixed;
         }
     </style>
 </head>
 
 <body>
-    <div class="fatherBox">
-        <div id="sonBox1"></div>
-        <div id="sonBox2"></div>
-        <div id="sonBox3"></div>
-    </div>
-    <!-- 要改为绝对定位 -->
+    <div style="top: 0;left: 0;"></div>
+    <div style="top: 0;left: 0;"></div>
+    <div style="top: 0;left: 0;"></div>
+    <div style="top: 0;left: 0;"></div>
+    <div style="top: 0;left: 0;"></div>
+    <div style="top: 0;left: 0;"></div>
+    <div style="top: 0;left: 0;"></div>
+    <div style="top: 0;left: 0;"></div>
+    <div style="top: 0;left: 0;"></div>
+    <div style="top: 0;left: 0;"></div>
+    <div style="top: 0;left: 0;"></div>
+    <div style="top: 0;left: 0;"></div>
+
+
     <script>
-        var pic = document.querySelector('div');
-        document.addEventListener('mousemove', function (e) {
-            var x = e.pageX;
-            var y = e.pageY;
-            pic.style.left = x - 50 + 'px'; //默认鼠标是在图片的左上角的，想要鼠标在图片的中间可以让图片向上向左移动自身的一半
-            pic.style.top = y - 50 + 'px';
+        var fires = document.querySelectorAll('div')
+        var mx = -9999
+        var my = -9999
+        window.addEventListener('mousemove', function (e) {
+            mx = e.clientX
+            my = e.clientY
+        })
+        requestAnimationFrame(function ani(time) {
+            var angle = time * 0.001
+            for (var fire of fires) {
+                fire.style.left = Math.cos(angle) * 150 + mx + 'px'
+                fire.style.top = Math.sin(angle) * 150 + my + 'px'
+                angle += Math.PI * 2 / fires.length
+            }
+            requestAnimationFrame(ani)
+        })
 
-
-        });
     </script>
 </body>
 
