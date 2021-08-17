@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var res = []
+    for (var i = 0; i < 20; i++) {
+      var row = []
+      for (var j = 0; j < 20; j++) {
+        var input = document.createElement('input')
+        input.type = 'checkBox'
+        input.setAttribute('data-needmodify', 'false')
+        row.push(input)
+        document.body.append(input)
+        if (j == 19) {
+          document.body.append(document.createElement('br'))
+        }
+      }
+      res.push(row)
+    }
+    var nextBtn = document.createElement('button')
+    var autoBtn = document.createElement('button')
+    var stopBtn = document.createElement('button')
+    nextBtn.textContent = 'next'
+    autoBtn.textContent = 'auto play'
+    autoBtn.style.marginLeft = 20 + 'px'
+    stopBtn.textContent = 'stop'
+    stopBtn.style.marginLeft = 20 + 'px'
+    document.body.append(nextBtn, autoBtn, stopBtn)
+
+
+    function loop(res) {
+      for (var i = 0; i < res.length; i++) {
+        for (var j = 0; j < res[i].length; j++) {
+          var needArr = []
+          needArr.push(res[i - 1 < 0 ? 19 : i - 1][j - 1 < 0 ? 19 : j - 1])    //左上
+          needArr.push(res[i - 1 < 0 ? 19 : i - 1][j])                          //中上
+          needArr.push(res[i - 1 < 0 ? 19 : i - 1][j + 1 > 19 ? 0 : j + 1])    //右上
+          needArr.push(res[i][j - 1 < 0 ? 19 : j - 1])    //左中
+          needArr.push(res[i][j + 1 > 19 ? 0 : j + 1])    //右中
+          needArr.push(res[i + 1 > 19 ? 0 : i + 1][j - 1 < 0 ? 19 : j - 1])    //左下
+          needArr.push(res[i + 1 > 19 ? 0 : i + 1][j])    //中下
+          needArr.push(res[i + 1 > 19 ? 0 : i + 1][j + 1 > 19 ? 0 : j + 1])    //右下
+          if (res[i][j].checked) {
+            res[i][j].dataset['needmodify'] = sentenceAlreadyLive(needArr)
+          } else {
+            res[i][j].dataset['needmodify'] = sentenceAlreadyDead(needArr)
+          }
+        }
+      }
+      return res
+    }
+
+    nextBtn.addEventListener('click', function (e) {
+      var clickRes = loop(res)
+      for (var i = 0; i < clickRes.length; i++) {
+        for (var j = 0; j < clickRes[i].length; j++) {
+          if (clickRes[i][j].dataset.needmodify == 'true') {
+            clickRes[i][j].checked = !clickRes[i][j].checked
+          }
+        }
+      }
+    })
+    var id
+    autoBtn.addEventListener('click', function (e) {
+      this.style.backgroundColor = 'pink'
+      id = setInterval(() => {
+        nextBtn.click()
+      }, 1000);
+    })
+
+    stopBtn.addEventListener('click', function (e) {
+      autoBtn.style.backgroundColor = ''
+      nextBtn.removeAttribute('disabled')
+      clearInterval(id)
+    })
+
+
+    function sentenceAlreadyLive(arr) {
+      var live = 0
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i].checked) {
+          live++
+        }
+      }
+      if (live < 2 || live > 3) {
+        return 'true'
+      }
+      else if (live == 2 || live == 3) {
+        return 'false'
+      }
+    }
+
+    function sentenceAlreadyDead(arr) {
+      var live = 0
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i].checked) {
+          live++
+        }
+      }
+      if (live == 3) {
+        return 'true'
+      }
+      return 'false'
+    }
+
+  </script>
+
+</body>
+
+</html>
