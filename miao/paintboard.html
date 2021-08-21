@@ -25,25 +25,32 @@
 </head>
 
 <body>
-
-  <svg width="800px" height="500px" version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink'
-    xmlns='http://www.w3.org/2000/svg'> </svg>
-
+  <div id="svgContainer">
+    <svg width="800px" height="500px" version='1.1' viewBox="0 0 800 500" xmlns:xlink='http://www.w3.org/1999/xlink'
+      xmlns='http://www.w3.org/2000/svg'> </svg>
+  </div>
+  <br>
   <input type="color" name="" id="colorInput">
   <input type="range" min="1" max="5" value="1" id="rangeInput" step="1">
   <button onclick="tool='line'">矩形</button><button onclick="tool='circle'">圆</button>
   <button onclick="saveFile()">保存</button>
+  <button onclick="openFile()">打开</button>
+  <input type="file" id="fileInput" hidden accept="*.svg"> <!-- accept了解一下  -->
 
 
   <script>
-    var lastPos = null
-    var tool = 'line'
+    // var lastPos = null
+    var tool = 'line'     //一开始肯定是默认使用画线的工具的
     var svg = document.querySelector('svg')
-    var drawdonwnNosave = false
-    svg.addEventListener('mousedown', function () {
+    var drawdonwnNosave = false    //此变量用来判断文件是否保存
+    svgContainer.addEventListener('mousedown', function (e) {
+      //因为触发的事件是放在了包裹svg文件的div上的   所以用e.target判断 我触发mousedown的那个元素是否在svg文件里面
+      if (!svg.contains(e.target)) {
+        return
+      }
       drawdonwnNosave = true
 
-      if (tool == 'line') {
+      if (tool == 'line') {     //如果选择的是画线的工具
         var pos = mousepos(svg)
         var polyline = document.createElementNS('http://www.w3.org/2000/svg', 'polyline')
         polyline.setAttribute('stroke', colorInput.value)
@@ -115,19 +122,17 @@
 
     })
 
-
+    //用来做撤销笔画的功能
     document.addEventListener('keydown', function (e) {
-      if (e.ctrlKey && e.key == 'z') {
-        if (svg.lastElementChild) {
-          // var bihua = svg.lastElementChild.dataset.bihua
-          // while (svg.lastElementChild && svg.lastElementChild.dataset.bihua == bihua) {
-          svg.removeChild(svg.lastElementChild)
-          // }
+      if (e.ctrlKey && e.key == 'z') {    //如果按下键盘的crtl+z键
+        if (svg.lastElementChild) {   //并且svg还存在最后一个元素的时候(最后一笔画)
+          svg.removeChild(svg.lastElementChild)  //删除那个元素(最后一笔画)
         }
       }
 
     })
 
+    // 用来获取鼠标在画布中的位置
     function mousepos(node) {
       var box = node.getBoundingClientRect()
       return {
@@ -136,7 +141,7 @@
       }
     }
 
-
+    //在浏览器关闭或者刷新时触发beforeunload事件
     window.addEventListener('beforeunload', e => {
       if (drawdonwnNosave) {
         return e.returnValue = '还没保存是否退出'
@@ -144,8 +149,9 @@
     })
 
 
+    // 保存文件按钮功能
     function saveFile() {
-      drawdonwnNosave = false
+      drawdonwnNosave = false  //表示用来判断此文件是否已经被保存的变量已经保存
       var svgSource = svg.outerHTML
       var blob = new Blob(['<?xml version="1.0" encoding="UTF-8"?>', svgSource], { type: 'image/xml+svg' })
       var url = URL.createObjectURL(blob)
@@ -155,8 +161,43 @@
       anchor.click()
 
     }
+    // 打开文件按钮功能
+    function openFile() {
+      if (drawdonwnNosave) {     //如果还没保存 就弹出一个confirm提示框
+        let answer = confirm('当前绘画未保存，确定要打开新的文件吗')
+        if (answer == 'false') {
+          return
+        }
+      }
+      fileInput.click()  //按了打开文件按钮 就模拟一下点击那个被隐藏起来的input:file按钮
+      //为了安全考虑  关于type类型是file的input 必须通过某个事件触发它的模拟click 要么就是由用户自己触发
+      //所以直接将fileInput.click()    写在外面自调用是没有用的并不会执行这个模拟操作 并且会报一个警告
+    }
+    // input元素上有事件发生了并且有数据发生变化了就会触发change事件    
+    // 打开文件的input:file  一旦点击了它就触发了 change事件  它的fileInput.files就会有数据
+    fileInput.addEventListener('change', function () {
+
+      // 这时候就可以读取fileInput.files的数据  因为在input:file  上设置了accept只能选择svg文件
+      var svgFile = fileInput.files[0]
+      var fr = new FileReader()
+      fr.addEventListener('load', function () {  //当读到了文件之后
+        var svgFileContent = fr.result
+        svgContainer.innerHTML = svgFileContent    //包裹svg文件的盒子的内容替换为新的读取进来的svg文件
+        //因为之前的window.svg变量是读的之前document.querySelector('svg')获取到的之前的svg  而现在已经替换成了新读取进来的svg
+        // 所以window.svg变量需要重新获取一下就获取现在放在包裹svg文件的盒子里的新读取的那个svg
+        window.svg = svgContainer.querySelector('svg')
+
+      })
+      fr.readAsText(svgFile)
+
+    })
 
 
+
+    //可以再做一个拖拽svg文件到页面打开文件的功能
+    function dargOpen() {
+
+    }
 
   </script>
 

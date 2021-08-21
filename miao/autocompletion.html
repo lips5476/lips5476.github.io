@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="text">
+  <ul></ul>
+
+  <script>
+    let input = document.querySelector('input')
+    let ul = document.querySelector('ul')
+    var currentShowTime = 0
+
+    input.addEventListener('input', debounce(function (e) {
+      var startTime = Date.now()
+      getSuggest(e.target.value, (suggest) => {
+        if (currentShowTime > startTime) {
+          return
+        }
+        currentShowTime = startTime
+        ul.innerHTML = ''
+        suggest.forEach(it => {
+          var li = document.createElement('li')
+          li.textContent = it
+          ul.append(li)
+        });
+      })
+    }, 200))
+
+    // 模拟数据请求联想的函数
+    function getSuggest(word, callback) {
+      var suggest = Array(10).fill(0).map((a, i) => {
+        return word + i
+      })  //suggest拿到这个输入单词的联想词组成的数组
+      setTimeout(() => {
+        callback(suggest)
+      }, 500 + 500 * Math.random())   //差不多在1秒左右把这个数据发过去 
+    }
+
+    function debounce(f, duration) {
+      var id, lateArgs, lateThis
+      return function (...args) {
+        lateArgs = args
+        lateThis = this
+        clearTimeout(id)
+        id = setTimeout(() => {
+          f.call(lateThis, ...lateArgs)
+        }, duration)
+
+      }
+    }
+
+
+  </script>
+
+</body>
+
+</html>

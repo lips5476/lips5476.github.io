@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <textarea name="" id="" cols="30" rows="10">
+    var a =1
+    var b=2
+    var c=0
+
+    console.log(a)
+    console.log(b)
+    c=a*b
+
+  </textarea>
+  <button onclick="run()">run</button>
+
+  <pre>
+
+
+
+  </pre>
+  <script>
+    var textarea = document.querySelector('textarea')
+    var pre = document.querySelector('pre')
+    function run() {
+      pre.innerHTML = ''
+      let console = {
+        log: function (...args) {
+          window.console.log(...args)
+          pre.textContent += args.join(' ') + '\n'
+        }
+      }
+      let preValue = eval(document.querySelector('textarea').value)
+      pre.textContent += '输出结果> ' + preValue
+    }
+  </script>
+
+</body>
+
+</html>
