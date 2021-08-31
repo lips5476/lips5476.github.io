@@ -17,9 +17,12 @@
 
 var lips5476 = function () {
 
-
+  //object ={'a':[{'b':{'c':3}}]}   
+  //'a[0].b.c'  =>3
+  //['a','0','b','c']    =>3
+  //'a.b.c',default    =>3
   function get(object, path, defaultVal = undefined) {
-    path = toPath(path)
+    path = toPath(path)    //将'a[0].b.c'   转换为 ['a','0','b','c']    'a.b.c'  转换为 ['a','b','c']
     for (var i = 0; i < path.length; i++) {
       if (object == undefined) {
         return defaultVal
@@ -30,9 +33,8 @@ var lips5476 = function () {
     return object
   }
 
-
   function toPath(val) {    //'a[0].b.c[0][3][4].foo.bar'
-    if (Array.isArray(val)) {
+    if (Array.isArray(val)) {   //如果已经是数组了就返回本身
       return val
     }
     else {
@@ -66,14 +68,11 @@ var lips5476 = function () {
   }
   bind.placeholder = window
 
-
-
-
-  function isMatch(object, source) {
+  function isMatch(object, source) {      //判断source对象是不是object对象的子集  是返回true 不是返回false
     if (object == source) {
-      true
+      return true
     }
-    if (typeof object !== 'object' || typeof source !== 'object') {
+    if (typeof object !== 'object' || typeof source !== 'object') {   //当比较的双方有一方不是对象直接false
       return false
     }
     for (var key in source) {
@@ -92,34 +91,34 @@ var lips5476 = function () {
 
   }
 
+
   function property(prop) {
+    // return get.bind(null, 跳过, prop)
     return function (obj) {
-      return obj[prop]
+      cv // return obj[prop]    //返回的是对象的传入的key的那个值
+      return get(obj, prop)
     }
   }
 
-  function matches(src) {
-    // 这个函数传入一个对象    用来返回一个匿名函数  
-    // 这个匿名函数用来得到
-    // 根据传入的条件对象从原本的对象中得知条件对象中的key对应的值和原本对象中同一个key得到的值是否相同
-    // 相同返回true  不同false
-    // ***即判断传入的src是不是原obj的子集
-    // return bind(isMatch, null, window, src)
-    return function (src) {
-      for (var key in obj) {
-        if (obj[key] !== src[key]) {
-          return false
-        }
-      }
-      return true
-    }
-  }
 
-  function matchesProperty(ary) {
+  //判断两个对象的值是否相等
+  function matches(src) {    //传入的是一个对象
+    // return function (obj) {
+    //   for (var key in obj) {
+    //     if (obj[key] !== src[key]) {
+    //       return false//返回的是true  或者  false
+    //     }
+    //   }
+    //   return true
+    // }
+    return isMatch(obj, src)
+  }
+  //判断传入的属性和值在对象里是否存在
+  function matchesProperty(ary) {     //传入的是一个数组
     var key = ary[0]
     var val = ary[1]
     return function (obj) {
-      return obj[key] == val
+      return obj[key] == val   //返回的是true  或者  false
     }
   }
 
@@ -231,7 +230,21 @@ var lips5476 = function () {
     }
     return res
   }
+  function flatten(arr) {
+    var res = []
+    for (var item of arr) {
+      if (!Array.isArray(item)) {
+        res.push(item)
+      } else {
+        for (var item2 of item) {
+          res.push(item2)
+        }
+      }
+    }
+    return res
 
+
+  }
   function flattenDeep(arr) {
     var res = []
     for (var i = 0; i < arr.length; i++) {
@@ -538,53 +551,51 @@ var lips5476 = function () {
     }
     return sum
   }
-  function difference(arr1, arr2) {
-    var res = []
-    if (arr1.length > arr2.length) {
-      for (var i = 0; i < arr2.length; i++) {
-        if (arr1[i] !== arr2[i]) {
-          res.push(arr1[i])
-        }
-      }
-      res.push(...arr1.slice(arr2.length))
-    }
-    else if (arr1.length < arr2.length) {
-      for (var i = 0; i < arr1.length; i++) {
-        if (arr1[i] !== arr2[i]) {
-          res.push(arr1[i])
-        }
-      }
-      res.push(...arr2.slice(arr1.length))
-    }
-    else {
-      for (var i = 0; i < arr2.length; i++) {
-        if (arr1[i] !== arr2[i]) {
-          res.push(arr1[i])
-        }
+  function difference(arr1, ...arr2) {     //第一个数组中存在后面所有数组中的值  则在第一个数组中将其删除
+    var needArr = [].concat(...arr2)
+    for (var i = 0, len = arr1.length; i < len; i++) {
+      if (needArr.includes(arr1[i])) {
+        arr1.splice(i, 1)
+        len--;
+        i--
       }
     }
-    return res
+    return arr1
   }
-  function differenceBy(arr1, arr2, predicate) {
+  function differenceBy(arr1, ...arr2) {
+    var predicate = arr2.pop()
     predicate = iteratee(predicate)
-    var res = []
-    var Newarr1 = arr1.map((it) => predicate(it))
-    var Newarr2 = arr2.map((it) => predicate(it))
-    if (Newarr1.length >= Newarr2.length) {
-      for (var i = 0; i < Newarr1.length; i++) {
-        if (!(Newarr2.includes(Newarr1[i]))) {
-          res.push(arr1[i])
-        }
+    var needArr = [].concat(...arr2)
+    needArr = needArr.map(it => predicate(it))
+    var needArr1 = arr1.slice()
+    for (var i = 0, len = needArr1.length; i < len; i++) {
+      if (needArr.includes(predicate(needArr1[i]))) {
+        arr1.splice(i, 1)
+        needArr1.splice(i, 1)
+        len--;
+        i--
       }
     }
-    if (Newarr1.length < Newarr2.length) {
-      for (var i = 0; i < Newarr1.length; i++) {
-        if (!(Newarr1.includes(Newarr2[i]))) {
-          res.push(arr2[i])
+    return arr1
+  }
+  function differenceWith(arr1, ...arr2) {
+    var predicate = arr2.pop()
+    predicate = iteratee(predicate)
+    var needArr = [].concat(...arr2)
+    var res = []
+    for (var i = 0, len = arr1.length; i < len; i++) {
+      var flag = true
+      for (var item of needArr) {
+        if (!predicate(arr1[i], item)) {
+          flag = false
         }
+      }
+      if (!flag) {
+        res.push(arr[i])
       }
     }
     return res
+
   }
   function isEmpty(val) {
     if (typeof val == 'boolean' || typeof val == 'undefined' || val !== val || typeof val == 'number' || val == null) {
@@ -629,6 +640,35 @@ var lips5476 = function () {
     return arr.slice(0, arr.length - n <= 0 ? 0 : arr.length - n)
   }
 
+  function dropRightWhile(arr, predicate) {
+    predicate = iteratee(predicate)
+    var res = []
+    for (var item of arr) {
+      if (!predicate(item)) {
+        break
+      }
+      else {
+        res.push(item)
+      }
+    }
+    return res
+
+  }
+
+  function dropWhile(arr, predicate) {
+    predicate = iteratee(predicate)
+    var res = []
+    for (var item of arr) {
+      if (!predicate(item)) {
+        res.push(item)
+      }
+      else {
+        break
+      }
+    }
+    return res
+  }
+
   function head(arr) {
     return arr[0]
   }
@@ -667,6 +707,32 @@ var lips5476 = function () {
 
   function initial(arr) {
     return arr.slice(0, arr.length - 1)
+  }
+
+
+  function findIndex(arr, predicate) {
+    predicate = iteratee(predicate)
+    for (var i = 0; i < arr.length; i++) {
+      if (predicate(arr[i])) {
+        return i
+      }
+    }
+    return -1
+  }
+
+  function findLastIndex(arr, predicate) {
+    predicate = iteratee(predicate)
+    for (var i = arr.length - 1; i >= 0; i--) {
+      if (predicate(arr[i]) == true) {
+        return i
+      }
+    }
+    return -1
+  }
+
+  function intersection() {
+
+
   }
 
 
@@ -718,9 +784,12 @@ var lips5476 = function () {
     sumBy: sumBy,
     difference: difference,
     differenceBy: differenceBy,
+    differenceWith: differenceWith,
     isEmpty: isEmpty,
     isElement: isElement,
     dropRight: dropRight,
+    dropRightWhile: dropRightWhile,
+    dropWhile: dropWhile,
     drop: drop,
     // fromPairs: fromPairs,
     head: head,
@@ -729,9 +798,11 @@ var lips5476 = function () {
     join: join,
     last: last,
     lastIndexOf: lastIndexOf,
-    // findIndex: findIndex,
-    // findLastIndex: findLastIndex,
-    // isArray: isArray
+    findIndex: findIndex,
+    findLastIndex: findLastIndex,
+    flatten: flatten,
+    // isArray: isArray,
+    intersection: intersection
 
 
 
