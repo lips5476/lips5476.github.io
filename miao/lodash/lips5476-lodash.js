@@ -709,10 +709,10 @@ var lips5476 = function () {
     var res = ''
     for (var i = 0; i < array.length; i++) {
       if (i == array.length - 1) {
-        res += array[i]
+        res += array[i].toString()
       }
       else {
-        res += array[i] + separator
+        res += array[i].toString() + separator.toString()
       }
     }
     return res
