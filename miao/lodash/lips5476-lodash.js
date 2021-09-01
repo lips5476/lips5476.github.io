@@ -777,6 +777,10 @@ var lips5476 = function () {
 
   }
 
+  function isArray(content) {
+    return toString.call(content) == '"[object Array]"'
+  }
+
 
 
 
@@ -830,7 +834,7 @@ var lips5476 = function () {
     dropRightWhile: dropRightWhile,
     dropWhile: dropWhile,
     drop: drop,
-    // fromPairs: fromPairs,
+    fromPairs: fromPairs,
     head: head,
     indexOf: indexOf,
     initial: initial,
@@ -840,8 +844,9 @@ var lips5476 = function () {
     findIndex: findIndex,
     findLastIndex: findLastIndex,
     flatten: flatten,
-    // isArray: isArray,
-    intersection: intersection
+    isArray: isArray,
+    intersection: intersection,
+    toPairs: toPairs,
 
 
 
