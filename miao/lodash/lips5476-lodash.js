@@ -103,15 +103,15 @@ var lips5476 = function () {
 
   //判断两个对象的值是否相等
   function matches(src) {    //传入的是一个对象
-    // return function (obj) {
-    //   for (var key in obj) {
-    //     if (obj[key] !== src[key]) {
-    //       return false//返回的是true  或者  false
-    //     }
-    //   }
-    //   return true
-    // }
-    return isMatch(obj, src)
+    return function (obj) {
+      //   for (var key in obj) {
+      //     if (obj[key] !== src[key]) {
+      //       return false//返回的是true  或者  false
+      //     }
+      //   }
+      //   return true
+      return isMatch(obj, src)
+    }
   }
   //判断传入的属性和值在对象里是否存在
   function matchesProperty(ary) {     //传入的是一个数组
