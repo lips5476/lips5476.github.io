@@ -1028,7 +1028,7 @@ var lips5476 = function () {
     pullAllWith: pullAllWith,
     sortedIndex: sortedIndex,
     sortedIndexBy: sortedIndexBy,
-    sortedIndexOf: sortedIndexOf,
+    sortedLastIndexOf: sortedLastIndexOf,
     // sortedLastIndexOf: sortedLastIndexOf,
     // tail: tail,
     // take: take,
