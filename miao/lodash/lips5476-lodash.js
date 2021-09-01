@@ -760,6 +760,49 @@ var lips5476 = function () {
     return res
   }
 
+
+  function intersectionBy(...arr) {
+    var predicate = arr.pop()
+    predicate = iteratee(predicate)
+    var arr1 = arr.shift()
+    var res = []
+    arr = arr.map(it => it.map(item => predicate(item)))
+    for (var itme of arr1) {
+      var flag = true
+      for (var item2 of arr) {
+        if (!item2.includes(predicate(itme))) {
+          flag = false
+        }
+      }
+      if (flag) {
+        res.push(itme)
+      }
+    }
+    return res
+  }
+
+
+  function intersectionWith(...arr) {
+    var predicate = arr.pop()
+    predicate = iteratee(predicate)
+    var arr1 = arr.shift()
+    var res = []
+    for (var item of arr1) {
+      var flag = true
+      for (var items of arr) {
+        for (var itemss of items) {
+          if (!predicate(itemss, item)) {
+            flag = false
+          }
+        }
+      }
+      if (flag) {
+        res.push(item)
+      }
+    }
+    return res
+  }
+
   function toPairs(obj) {    //toPairs({"a":1,"b":2})   [["a",1],["b",2]]
     var res = []
     for (var key in obj) {
@@ -802,8 +845,63 @@ var lips5476 = function () {
     return undefined
   }
 
-  function pull() {
+  function pull(arr, ...content) {
+    var res = []
+    for (var item of arr) {
+      if (!content.includes(item)) {
+        res.push(item)
+      }
+    }
 
+    return res
+
+  }
+
+  function pullAll(arr, ...content) {
+    var res = []
+    var needArr = [].concat(...content)
+    for (var item of arr) {
+      if (!needArr.includes(item)) {
+        res.push(item)
+      }
+    }
+    return res
+  }
+
+  function pullAllBy(arr, ...content) {
+    var predicate = content.pop()
+    predicate = iteratee(predicate)
+    var needArr = [].concat(...content)
+    needArr = needArr.map(it => predicate(it))
+    var res = []
+    for (var item of arr) {
+      if (!needArr.includes(predicate(item))) {
+        res.push(item)
+      }
+    }
+    return res
+  }
+
+  function intersectionWith(...arr) {
+    var predicate = arr.pop()
+    predicate = iteratee(predicate)
+    var arr1 = arr.shift()
+    var res = []
+    for (var item of arr1) {
+      var flag = false
+      for (var items of arr) {
+        for (var itemss of items) {
+          console.log(itemss, item)
+          if (predicate(itemss, item)) {
+            flag = true
+          }
+        }
+      }
+      if (flag) {
+        res.push(item)
+      }
+    }
+    return res
   }
 
 
@@ -870,12 +968,14 @@ var lips5476 = function () {
     flatten: flatten,
     isArray: isArray,
     intersection: intersection,
+    intersectionBy: intersectionBy,
+    intersectionWith: intersectionWith,
     toPairs: toPairs,
-    nth: nth
-    // pull: pull,
-    // pullAll: pullAll,
-    // pullAllBy: pullAllBy,
-    // pullAllWith: pullAllWith,
+    nth: nth,
+    pull: pull,
+    pullAll: pullAll,
+    pullAllBy: pullAllBy,
+    pullAllWith: pullAllWith,
     // tail: tail,
     // take: take,
     // takeRight: takeRight,
