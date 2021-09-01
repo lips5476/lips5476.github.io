@@ -782,26 +782,7 @@ var lips5476 = function () {
   }
 
 
-  function intersectionWith(...arr) {
-    var predicate = arr.pop()
-    predicate = iteratee(predicate)
-    var arr1 = arr.shift()
-    var res = []
-    for (var item of arr1) {
-      var flag = true
-      for (var items of arr) {
-        for (var itemss of items) {
-          if (!predicate(itemss, item)) {
-            flag = false
-          }
-        }
-      }
-      if (flag) {
-        res.push(item)
-      }
-    }
-    return res
-  }
+
 
   function toPairs(obj) {    //toPairs({"a":1,"b":2})   [["a",1],["b",2]]
     var res = []
@@ -876,6 +857,24 @@ var lips5476 = function () {
     var res = []
     for (var item of arr) {
       if (!needArr.includes(predicate(item))) {
+        res.push(item)
+      }
+    }
+    return res
+  }
+  function pullAllWith(arr, ...content) {
+    var predicate = content.pop()
+    predicate = iteratee(predicate)
+    var needArr = [].concat(...content)
+    var res = []
+    for (var item of arr) {
+      var flag = true
+      for (var items of needArr) {
+        if (predicate(item, items)) {
+          flag = false
+        }
+      }
+      if (flag) {
         res.push(item)
       }
     }
