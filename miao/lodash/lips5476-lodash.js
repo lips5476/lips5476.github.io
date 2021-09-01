@@ -951,6 +951,21 @@ var lips5476 = function () {
     // }
   }
 
+  function tail(arr) {
+    arr.shift()
+    return arr
+
+  }
+  function take(arr, num = 1) {
+    return arr.slice(0, null)
+
+  }
+  function union(...arr) {
+    var needArr = [].concat(...arr)
+    var set = new Set(needArr)
+    return Array.from(set)
+  }
+
 
 
 
@@ -1030,12 +1045,12 @@ var lips5476 = function () {
     sortedIndexBy: sortedIndexBy,
     sortedLastIndexOf: sortedLastIndexOf,
     // sortedLastIndexOf: sortedLastIndexOf,
-    // tail: tail,
-    // take: take,
+    tail: tail,
+    take: take,
     // takeRight: takeRight,
     // takeRightWhile: takeRightWhile,
     // takeWhile: takeWhile,
-    // union: union,
+    union: union,
     // unionBy: unionBy,
     // unionWith: unionWith,
     // unzipWith: unzipWith,
