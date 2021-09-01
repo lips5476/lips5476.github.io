@@ -966,6 +966,44 @@ var lips5476 = function () {
     return Array.from(set)
   }
 
+  function xor(...arr) {
+    var needArr = [].concat(...arr)
+    var resObj = {}
+    for (var i = 0; i < needArr.length; i++) {
+      if (!resObj[needArr[i]]) {
+        resObj[needArr[i]] = 1
+      } else {
+        resObj[needArr[i]]++
+      }
+    }
+    var res = []
+    for (var key in resObj) {
+      if (resObj[key] == 1) {
+        res.push(Number(key))
+      }
+    }
+    return res
+  }
+  function without(arr, ...num) {
+    var res = []
+    for (var item of arr) {
+      if (!num.includes(item)) {
+        res.push(item)
+      }
+    }
+    return res
+  }
+
+  function every(arr, predicate) {
+    predicate = iteratee(predicate)
+    for (var item of arr) {
+      if (!predicate(item)) {
+        return false
+      }
+    }
+    return true
+  }
+
 
 
 
@@ -1054,8 +1092,9 @@ var lips5476 = function () {
     // unionBy: unionBy,
     // unionWith: unionWith,
     // unzipWith: unzipWith,
-    // without: without,
-    // xor: xor,
+    without: without,
+    xor: xor,
+    every: every,
     // xorBy: xorBy,
     // xorBy: xorBy,
     // zipObject: zipObject,
