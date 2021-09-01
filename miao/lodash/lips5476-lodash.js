@@ -749,12 +749,12 @@ var lips5476 = function () {
     for (var itme of arr1) {
       var flag = true
       for (var item2 of arr) {
-        if (!item2.includes(item)) {
+        if (!item2.includes(itme)) {
           flag = false
         }
       }
       if (flag) {
-        res.push(item)
+        res.push(itme)
       }
     }
     return res
