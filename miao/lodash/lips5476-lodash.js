@@ -564,19 +564,32 @@ var lips5476 = function () {
   }
   function differenceBy(arr1, ...arr2) {
     var predicate = arr2.pop()
-    predicate = iteratee(predicate)
-    var needArr = [].concat(...arr2)
-    needArr = needArr.map(it => predicate(it))
-    var needArr1 = arr1.slice()
-    for (var i = 0, len = needArr1.length; i < len; i++) {
-      if (needArr.includes(predicate(needArr1[i]))) {
-        arr1.splice(i, 1)
-        needArr1.splice(i, 1)
-        len--;
-        i--
+    if (Array.isArray(predicate)) {
+      arr2.push(predicate)
+      var needArr = [].concat(...arr2)
+      for (var i = 0, len = arr1.length; i < len; i++) {
+        if (needArr.includes(arr1[i])) {
+          arr1.splice(i, 1)
+          len--;
+          i--
+        }
       }
+      return arr1
+    } else {
+      predicate = iteratee(predicate)
+      var needArr = [].concat(...arr2)
+      needArr = needArr.map(it => predicate(it))
+      var needArr1 = arr1.slice()
+      for (var i = 0, len = needArr1.length; i < len; i++) {
+        if (needArr.includes(predicate(needArr1[i]))) {
+          arr1.splice(i, 1)
+          needArr1.splice(i, 1)
+          len--;
+          i--
+        }
+      }
+      return arr1
     }
-    return arr1
   }
   function differenceWith(arr1, ...arr2) {
     var predicate = arr2.pop()
