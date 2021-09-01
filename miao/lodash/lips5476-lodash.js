@@ -95,7 +95,7 @@ var lips5476 = function () {
   function property(prop) {
     // return get.bind(null, 跳过, prop)
     return function (obj) {
-      cv // return obj[prop]    //返回的是对象的传入的key的那个值
+      // return obj[prop]    //返回的是对象的传入的key的那个值
       return get(obj, prop)
     }
   }
