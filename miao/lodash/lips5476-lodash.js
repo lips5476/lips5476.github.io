@@ -697,7 +697,7 @@ var lips5476 = function () {
     return -1
   }
 
-  function lastIndexOf(arr, val, fromIndex = array.length - 1) {
+  function lastIndexOf(arr, val, fromIndex = arr.length - 1) {
     for (var i = fromIndex; i >= 0; i--) {
       if (arr[i] == val) {
         return i
