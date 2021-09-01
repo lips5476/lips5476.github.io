@@ -903,6 +903,57 @@ var lips5476 = function () {
     return res
   }
 
+  function sortedIndex(arr, num) {
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] < num) {
+        return i + 1
+      }
+      else if (arr[i] == num) {
+        return i
+      }
+    }
+  }
+
+  function sortedIndexBy(arr, num, predicate) {
+    predicate = iteratee(predicate)
+    num = predicate(num)
+    for (var i = 0; i < arr.length; i++) {
+      if (predicate(arr[i]) < num) {
+        return i + 1
+      }
+      else if (predicate(arr[i]) == num) {
+        return i
+      }
+    }
+  }
+
+  function sortedIndexOf(arr, value) {
+    for (var i = 0; i < arr.length; i++)
+      if (arr[i] == value) return i
+    return -1
+  }
+  function sortedLastIndexOf(arr, value) {
+    for (var i = arr.length; i >= 0; i--)
+      if (arr[i] == value) return i
+    return -1
+  }
+
+  function sortedLastIndexBy(arr, num, predicate) {
+    // predicate = iteratee(predicate)
+    // num = predicate(num)
+    // for (var i = 0; i < arr.length; i++) {
+    //   if (predicate(arr[i]) < num) {
+    //     return i + 1
+    //   }
+    //   else if (predicate(arr[i]) == num) {
+    //     return i
+    //   }
+    // }
+  }
+
+
+
+
 
 
 
@@ -975,6 +1026,10 @@ var lips5476 = function () {
     pullAll: pullAll,
     pullAllBy: pullAllBy,
     pullAllWith: pullAllWith,
+    sortedIndex: sortedIndex,
+    sortedIndexBy: sortedIndexBy,
+    sortedIndexOf: sortedIndexOf,
+    // sortedLastIndexOf: sortedLastIndexOf,
     // tail: tail,
     // take: take,
     // takeRight: takeRight,
