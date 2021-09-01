@@ -778,9 +778,7 @@ var lips5476 = function () {
   }
 
   function isArray(content) {
-    return toString.call(content) == "[object Array]"
-
-
+    return Object.prototype.toString.call(content) == "[object Array]"
 
   }
 
