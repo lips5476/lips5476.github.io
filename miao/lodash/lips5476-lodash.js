@@ -76,13 +76,13 @@ var lips5476 = function () {
       return false
     }
     for (var key in source) {
-      if (source[key] && typeof source !== 'object') {
+      if (source[key] && typeof source[key] !== 'object') {
         if (object[key] !== source[key]) {
           return false
         }
       }
       else {
-        if (isMatch(object[key]) !== isMatch(source[key])) {
+        if (!isMatch(object[key], source[key])) {
           return false
         }
       }
@@ -130,7 +130,7 @@ var lips5476 = function () {
       return property(maybePredicate)
     }
     if (Array.isArray(maybePredicate)) {
-      return matchesProperty(...maybePredicate)
+      return matchesProperty(maybePredicate)
     }
     if (typeof maybePredicate === 'object') {
       return matches(maybePredicate)
