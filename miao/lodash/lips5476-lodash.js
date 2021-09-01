@@ -743,13 +743,39 @@ var lips5476 = function () {
     return -1
   }
 
-  function intersection() {
-
-
+  function intersection(...arr) {
+    var arr1 = arr.shift()
+    var res = []
+    for (var itme of arr1) {
+      var flag = true
+      for (var item2 of arr) {
+        if (!item2.includes(item)) {
+          flag = false
+        }
+      }
+      if (flag) {
+        res.push(item)
+      }
+    }
+    return res
   }
 
+  function toPairs(obj) {    //toPairs({"a":1,"b":2})   [["a",1],["b",2]]
+    var res = []
+    for (var key in obj) {
+      res.push([key, obj[key]])
+    }
+    return res
+  }
 
+  function fromPairs(arr) { //fromPairs([['fred', 30], ['barney', 40]]);  { 'fred': 30, 'barney': 40 }
+    var obj = {}
+    for (var item of arr) {
+      obj[item[0]] = item[1]
+    }
+    return obj
 
+  }
 
 
 
