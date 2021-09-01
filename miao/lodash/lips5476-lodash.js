@@ -782,6 +782,25 @@ var lips5476 = function () {
 
   }
 
+  function nth(arr, nth) {
+    if (nth > 0) {
+      for (var i = 0; i < arr.length; i++) {
+        if (i == nth) {
+          return arr[i]
+        }
+      }
+    } else {
+      needArr = arr.slice()
+      needArr.reverse()
+      nth = -nth
+      for (var i = 0; i < needArr.length; i++) {
+        if (i + 1 == nth) {
+          return needArr[i]
+        }
+      }
+    }
+    return undefined
+  }
 
 
 
@@ -848,6 +867,45 @@ var lips5476 = function () {
     isArray: isArray,
     intersection: intersection,
     toPairs: toPairs,
+    nth: nth,
+    pull: pull,
+    pullAll: pullAll,
+    pullAllBy: pullAllBy,
+    pullAllWith: pullAllWith,
+    tail: tail,
+    take: take,
+    takeRight: takeRight,
+    takeRightWhile: takeRightWhile,
+    takeWhile: takeWhile,
+    union: union,
+    unionBy: unionBy,
+    unionWith: unionWith,
+    unzipWith: unzipWith,
+    without: without,
+    xor: xor,
+    xorBy: xorBy,
+    xorBy: xorBy,
+    zipObject: zipObject,
+    zipObjectDeep: zipObjectDeep,
+    zipWith: zipWith,
+    every: every,
+    find: find,
+    findLast: findLast,
+    flatMap: flatMap,
+    flatMapDeep: flatMapDeep,
+    flatMapDepth: flatMapDepth,
+    forEachRight: forEachRight,
+    includes: includes,
+    invokeMap: invokeMap,
+    orderBy: orderBy,
+    partition: partition,
+    reject: reject,
+    sample: sample,
+    sampleSize: sampleSize,
+    size: size,
+    some: some,
+    defer: defer,
+    delay: delay,
 
 
 
