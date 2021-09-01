@@ -77,12 +77,12 @@ var lips5476 = function () {
     }
     for (var key in source) {
       if (source[key] && typeof source !== 'object') {
-        if (obj[key] !== source[key]) {
+        if (object[key] !== source[key]) {
           return false
         }
       }
       else {
-        if (isMatch(obj[key]) !== isMatch(source[key])) {
+        if (isMatch(object[key]) !== isMatch(source[key])) {
           return false
         }
       }
