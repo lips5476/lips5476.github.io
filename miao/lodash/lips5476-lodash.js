@@ -802,6 +802,10 @@ var lips5476 = function () {
     return undefined
   }
 
+  function pull() {
+
+  }
+
 
 
 
@@ -867,7 +871,7 @@ var lips5476 = function () {
     isArray: isArray,
     intersection: intersection,
     toPairs: toPairs,
-    nth: nth,
+    nth: nth
     // pull: pull,
     // pullAll: pullAll,
     // pullAllBy: pullAllBy,
