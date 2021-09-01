@@ -591,7 +591,7 @@ var lips5476 = function () {
         }
       }
       if (!flag) {
-        res.push(arr[i])
+        res.push(arr1[i])
       }
     }
     return res
