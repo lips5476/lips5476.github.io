@@ -810,6 +810,16 @@ var lips5476 = function () {
     return -1
   }
 
+  function find(arr, predicate) {
+    predicate = iteratee(predicate)
+
+    for (var item of arr) {
+      if (predicate(item)) {
+        return item
+      }
+    }
+  }
+
   function findLastIndex(arr, predicate) {
     predicate = iteratee(predicate)
     for (var i = arr.length - 1; i >= 0; i--) {
