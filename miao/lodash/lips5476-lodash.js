@@ -1054,7 +1054,6 @@ var lips5476 = function () {
       }
     }
     return res.join('')
-
   }
 
   function invert(obj) {
@@ -1104,6 +1103,36 @@ var lips5476 = function () {
     })
     return timer - 1
 
+  }
+  function toLower(str) {
+    str = str.split('')
+    var res = []
+    for (var i = 0; i < str.length; i++) {
+      var item = str[i]
+      item = item.charCodeAt()
+      if (item >= 65 && item <= 90) {
+        item += 32
+      }
+      item = String.fromCharCode(item)
+      res.push(item)
+    }
+    res = res.join('')
+    return res
+  }
+  function toUpper(str) {
+    str = str.split('')
+    var res = []
+    for (var i = 0; i < str.length; i++) {
+      var item = str[i]
+      item = item.charCodeAt()
+      if (item >= 97 && item <= 122) {
+        item -= 32
+      }
+      item = String.fromCharCode(item)
+      res.push(item)
+    }
+    res = res.join('')
+    return res
   }
 
 
@@ -1228,6 +1257,8 @@ var lips5476 = function () {
     invertBy: invertBy,
     keysIn: keysIn,
     defer: defer,
+    toLower: toLower,
+    toUpper: toUpper,
 
 
 
