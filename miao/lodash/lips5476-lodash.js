@@ -1098,12 +1098,10 @@ var lips5476 = function () {
   }
 
   function defer(func, ...args) {
-    var time = Date.now()
-    setTimeout(() => {
+    var timer = setTimeout(() => {
       func(...args)
-      time = Date.now() - time
     })
-    return time - 1
+    return timer - 1
 
   }
 
@@ -1216,7 +1214,6 @@ var lips5476 = function () {
     // sampleSize: sampleSize,
     size: size,
     // some: some,
-    // defer: defer,
     // delay: delay,
     get: get,
     // bind: bind,
