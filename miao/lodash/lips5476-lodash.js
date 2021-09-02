@@ -1137,6 +1137,13 @@ var lips5476 = function () {
     // some: some,
     // defer: defer,
     // delay: delay,
+    get: get,
+    bind: bind,
+    matches: matches,
+    property: property,
+    isMatch: isMatch,
+    matchesProperty: matchesProperty,
+    toPath: toPath,
 
 
 
