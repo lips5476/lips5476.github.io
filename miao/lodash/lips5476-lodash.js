@@ -1156,10 +1156,7 @@ var lips5476 = function () {
     return str
   }
 
-  function range(start, end, step) {
-    if (arguments.length == 1)
 
-  }
 
 
 
