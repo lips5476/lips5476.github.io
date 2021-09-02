@@ -394,11 +394,20 @@ var lips5476 = function () {
     return arr
   }
   function sortBy(arr, predicate) {
-    predicate = iteratee(predicate)
-    return arr.sort((a, b) => {
-      return predicate(a) - predicate(b)
-    })
-
+    predicate = iteratee(predicate[0])
+    for (var i = 0; i < arr.length - 1; i++) {
+      var minIndex = i
+      for (var j = i + 1; j < arr.length; j++) {
+        if (predicate(arr[j]) < predicate(arr[minIndex])) {
+          // if (arr[j] < arr[minIndex]) {
+          minIndex = j
+        }
+      }
+      var temp = arr[i]
+      arr[i] = arr[minIndex]
+      arr[minIndex] = temp
+    }
+    return arr
   }
 
   function isEqual(a, b) {
@@ -1006,6 +1015,15 @@ var lips5476 = function () {
     return true
   }
 
+  function findLast(arr, predicate) {
+    predicate = iteratee(predicate)
+    for (var i = arr.length; i >= 0; i--) {
+      if (predicate(arr[i])) {
+        return i + 1
+      }
+    }
+    return undefined
+  }
 
 
 
@@ -1102,9 +1120,8 @@ var lips5476 = function () {
     // zipObject: zipObject,
     // zipObjectDeep: zipObjectDeep,
     // zipWith: zipWith,
-    // every: every,
     // find: find,
-    // findLast: findLast,
+    findLast: findLast,
     // flatMap: flatMap,
     // flatMapDeep: flatMapDeep,
     // flatMapDepth: flatMapDepth,
