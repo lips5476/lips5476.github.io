@@ -394,8 +394,10 @@ var lips5476 = function () {
     return arr
   }
   function sortBy(arr, predicate) {
-
-
+    predicate = iteratee(predicate)
+    return arr.sort((a, b) => {
+      return predicate(a) - predicate(b)
+    })
 
   }
 
@@ -957,7 +959,7 @@ var lips5476 = function () {
 
   }
   function take(arr, num = 1) {
-    return arr.slice(0, null)
+    return arr.slice(0, num)
 
   }
   function union(...arr) {
