@@ -327,12 +327,23 @@ var lips5476 = function () {
 
   function reduce(collection, predicate, initial) {
     predicate = iteratee(predicate)
-    startIdx = 0
-    if (arguments.length == 2) {
-      initial = collection[0], startIdx = 1
+    if (Array.isArray(collection)) {
+      startIdx = 0
+      if (arguments.length == 2) {
+        initial = collection[0], startIdx = 1
+      }
+      for (var i = startIdx; i < collection.length; i++) {
+        initial = predicate(initial, collection[i])
+      }
     }
-    for (var i = startIdx; i < collection.length; i++) {
-      initial = predicate(initial, collection[i])
+    else if (typeof collection == 'object') {
+      if (arguments.length == 2) {
+        var keysArr = Object.keys(collection)
+        initial = collection[keysArr[0]]
+      }
+      for (var key in collection) {
+        initial = predicate(initial, collection[key], key)
+      }
     }
     return initial
   }
