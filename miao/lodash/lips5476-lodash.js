@@ -733,15 +733,15 @@ var lips5476 = function () {
   function dropRightWhile(arr, predicate) {
     predicate = iteratee(predicate)
     var res = []
-    for (var item of arr) {
+    var index = 0
+    for (var i = arr.length - 1; i >= 0; i--) {
       if (!predicate(item)) {
-        break
-      }
-      else {
-        res.push(item)
+        index = i
       }
     }
-    return res
+
+
+    return arr.splice(0, i)
 
   }
 
