@@ -647,6 +647,9 @@ var lips5476 = function () {
   }
 
   function isElement(val) {
+    if (Object.is(val, null) || Object.is(val, null)) {
+      return false
+    }
     if (val.nodeType !== undefined) {
       return true
     }
