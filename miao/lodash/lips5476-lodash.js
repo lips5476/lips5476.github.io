@@ -1089,6 +1089,7 @@ var lips5476 = function () {
     return newObj
   }
 
+
   function keysIn(obj) {
     var arr = []
     for (var key in obj) {
@@ -1162,6 +1163,9 @@ var lips5476 = function () {
 
   function repeat(str = '', count = 0) {
     var str1 = str
+    if (count == 0) {
+      return str
+    }
     for (var i = 0; i < count - 1; i++) {
       str += str1
     }
