@@ -141,8 +141,14 @@ var lips5476 = function () {
   function map(collection, mapper) {
     mapper = iteratee(mapper)
     var res = []
-    for (var key in collection) {
-      res.push(mapper(collection[key], key, collection))
+    if (Array.isArray(collection)) {
+      for (var i = 0; i < collection.length; i++) {
+        res.push(mapper(collection[i], i, collection))
+      }
+    } else if (typeof collection == 'object') {
+      for (var key in collection) {
+        res.push(mapper(collection[key], key, collection))
+      }
     }
     return res
   }
