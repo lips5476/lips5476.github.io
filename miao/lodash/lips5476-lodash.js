@@ -1080,6 +1080,15 @@ var lips5476 = function () {
     }
     return true
   }
+  function some(arr, predicate) {
+    predicate = iteratee(predicate)
+    for (var item of arr) {
+      if (predicate(item)) {
+        return true
+      }
+    }
+    return false
+  }
 
   function findLast(arr, predicate) {
     predicate = iteratee(predicate)
@@ -1276,6 +1285,10 @@ var lips5476 = function () {
 
   }
 
+  function flatMap(arr, predicate) {
+
+
+  }
 
 
   return {
@@ -1363,7 +1376,7 @@ var lips5476 = function () {
     // zipWith: zipWith,
     // find: find,
     findLast: findLast,
-    // flatMap: flatMap,
+    flatMap: flatMap,
     // flatMapDeep: flatMapDeep,
     // flatMapDepth: flatMapDepth,
     forEachRight: forEachRight,
@@ -1372,10 +1385,9 @@ var lips5476 = function () {
     // orderBy: orderBy,
     // partition: partition,
     // reject: reject,
-    // sample: sample,
     // sampleSize: sampleSize,
     size: size,
-    // some: some,
+    some: some,
     // delay: delay,
     get: get,
     // bind: bind,
