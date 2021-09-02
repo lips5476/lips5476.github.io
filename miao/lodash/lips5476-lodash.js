@@ -1065,15 +1065,27 @@ var lips5476 = function () {
     return arr
   }
   function mapKeys(obj, predicate) {
-    predicate = iteratee(predicate)
-    for (var key in obj) {
-      key = predicate(key)
-    }
 
-    return obj
 
   }
+  function size(content) {
+    if (typeof content == 'string' || Array.isArray(content)) {
+      return content.length
+    } else if (typeof content == 'object') {
+      var arr = Object.keys(content)
+      return arr.length
+    }
+  }
 
+  function defer(func, ...args) {
+    var time = Date.now()
+    setTimeout(() => {
+      func(...args)
+      time = Date.now() - time
+    })
+    return time - 1
+
+  }
 
 
 
@@ -1182,7 +1194,7 @@ var lips5476 = function () {
     // reject: reject,
     // sample: sample,
     // sampleSize: sampleSize,
-    // size: size,
+    size: size,
     // some: some,
     // defer: defer,
     // delay: delay,
@@ -1197,6 +1209,7 @@ var lips5476 = function () {
     invert: invert,
     invertBy: invertBy,
     keysIn: keysIn,
+    defer: defer,
 
 
 
