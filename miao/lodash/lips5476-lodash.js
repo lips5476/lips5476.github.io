@@ -1286,13 +1286,11 @@ var lips5476 = function () {
   }
 
   function invokeMap(collection, methodas, ...args) {
-    var res = []
-    for (var item of collection) {
-      item = methodas.call(item, ...args)
-      res.push(item)
+    if (typeof path == 'string') {
+      return collection.map(val => { console.log(val[path]); return val[path](...args) });
+    } else if (typeof path == 'function') {
+      return collection.map(val => path.call(val, ...args));
     }
-    return res
-
   }
 
   function flatMap(arr, predicate) {
