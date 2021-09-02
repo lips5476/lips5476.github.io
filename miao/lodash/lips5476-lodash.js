@@ -1276,10 +1276,25 @@ var lips5476 = function () {
 
   }
 
-  function includes(arr, target) {
-    for (var item of arr) {
-      if (item == target) {
+  function includes(content, target, index) {
+    if (typeof content == 'string') {
+      var startContent = content
+      resContent = content.split(target)
+      if (resContent != startContent) {
         return true
+      }
+    } else if (Array.isArray(content)) {
+      for (var i = index; i < content.length; i++) {
+        if (content[i] == target) {
+          return true
+        }
+      }
+
+    } else if (typeof content == 'object') {
+      for (var key in content) {
+        if (content[key] == target) {
+          return true
+        }
       }
     }
     return false
