@@ -1134,21 +1134,41 @@ var lips5476 = function () {
     res = res.join('')
     return res
   }
+  function startsWith(str = '', target, position = 0) {
+    str = str.split('')
+    return str[position] == target
+  }
+  function replace(str, target, replacer) {
+    str = str.split(target)
+    str = str.join(replacer)
+    return str
+  }
+  function pad(str = '', length = 0, chars = ' ') {
 
 
+  }
 
+  function repeat(str = '', count = 0) {
+    var str1 = str
+    for (var i = 0; i < count - 1; i++) {
+      str += str1
+    }
+    return str
+  }
 
+  function range(start, end, step) {
+    if (arguments.length == 1)
 
-
-
-
-
-
+  }
 
 
 
 
   return {
+    pad: pad,
+    repeat: repeat,
+    replace: replace,
+    startsWith: startsWith,
     chunk: chunk,
     compact: compact,
     concat: concat,
