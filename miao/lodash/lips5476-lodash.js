@@ -1065,15 +1065,27 @@ var lips5476 = function () {
   }
 
   function invertBy(obj, predicate) {
-    predicate = iteratee(predicate)
-    var newObj = {}
-    for (var key in obj) {
-      if (!newObj[obj[key]]) {
-        newObj[predicate(obj[key])] = [key]
-      } else {
-        newObj[predicate(obj[key])].push(key)
+    if (arguments.length == 1) {
+      var newObj = {}
+      for (var key in obj) {
+        if (!newObj[obj[key]]) {
+          newObj[obj[key]] = [key]
+        } else {
+          newObj[obj[key]].push(key)
+        }
+      }
+    } else {
+      predicate = iteratee(predicate)
+      var newObj = {}
+      for (var key in obj) {
+        if (!newObj[predicate(obj[key])]) {
+          newObj[predicate(obj[key])] = [key]
+        } else {
+          newObj[predicate(obj[key])].push(key)
+        }
       }
     }
+
     return newObj
   }
 
