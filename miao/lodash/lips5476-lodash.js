@@ -1162,10 +1162,6 @@ var lips5476 = function () {
 
 
   return {
-    pad: pad,
-    repeat: repeat,
-    replace: replace,
-    startsWith: startsWith,
     chunk: chunk,
     compact: compact,
     concat: concat,
@@ -1276,7 +1272,10 @@ var lips5476 = function () {
     defer: defer,
     toLower: toLower,
     toUpper: toUpper,
-
+    pad: pad,
+    repeat: repeat,
+    replace: replace,
+    startsWith: startsWith,
 
 
   }
