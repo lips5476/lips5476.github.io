@@ -1024,6 +1024,55 @@ var lips5476 = function () {
     }
     return undefined
   }
+  function trim(str, code = ' ') {
+    str = str.split('')
+    code = code.split('')
+    var res = []
+    for (var item of str) {
+      if (!code.includes(item)) {
+        res.push(item)
+      }
+    }
+    return res.join('')
+
+  }
+
+  function invert(obj) {
+    var newObj = {}
+    for (var key in obj) {
+      newObj[obj[key]] = key
+    }
+    return newObj
+  }
+
+  function invertBy(obj) {
+    var newObj = {}
+    for (var key in obj) {
+      if (!newObj[obj[key]]) {
+        newObj[obj[key]] = [key]
+      } else {
+        newObj[obj[key]].push(key)
+      }
+    }
+    return newObj
+  }
+
+  function keysIn(obj) {
+    var arr = []
+    for (var key in obj) {
+      arr.push(key)
+    }
+    return arr
+  }
+  function mapKeys(obj, predicate) {
+    predicate = iteratee(predicate)
+    for (var key in obj) {
+      key = predicate(key)
+    }
+
+    return obj
+
+  }
 
 
 
@@ -1138,13 +1187,16 @@ var lips5476 = function () {
     // defer: defer,
     // delay: delay,
     get: get,
-    bind: bind,
+    // bind: bind,
     matches: matches,
     property: property,
     isMatch: isMatch,
     matchesProperty: matchesProperty,
     toPath: toPath,
-
+    trim: trim,
+    invert: invert,
+    invertBy: invertBy,
+    keysIn: keysIn,
 
 
 
