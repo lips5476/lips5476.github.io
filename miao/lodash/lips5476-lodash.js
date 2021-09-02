@@ -1406,7 +1406,7 @@ var lips5476 = function () {
     includes: includes,
     invokeMap: invokeMap,
     // orderBy: orderBy,
-    // partition: partition,
+    partition: partition,
     // reject: reject,
     // sampleSize: sampleSize,
     size: size,
