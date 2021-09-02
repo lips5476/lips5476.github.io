@@ -325,8 +325,30 @@ var lips5476 = function () {
 
   function forEach(collection, predicate) {
     predicate = iteratee(predicate)
-    for (var key in collection) {
-      predicate(collection[key], key, collection)
+    if (Array.isArray(collection)) {
+      for (var i = 0; i < collection.length; i++) {
+        predicate(collection[i], i, collection)
+      }
+    }
+    else if (typeof collection == 'object') {
+      for (var key in collection) {
+        predicate(collection[key], key, collection)
+      }
+    }
+    return collection
+  }
+
+  function forEachRight(collection, predicate) {
+    predicate = iteratee(predicate)
+    if (Array.isArray(collection)) {
+      for (var i = collection.length - 1; i >= 0; i--) {
+        predicate(collection[i], i, collection)
+      }
+    }
+    else if (typeof collection == 'object') {
+      for (var key in collection) {
+        predicate(collection[key], key, collection)
+      }
     }
     return collection
   }
@@ -339,6 +361,30 @@ var lips5476 = function () {
         initial = collection[0], startIdx = 1
       }
       for (var i = startIdx; i < collection.length; i++) {
+        initial = predicate(initial, collection[i])
+      }
+    }
+    else if (typeof collection == 'object') {
+      if (arguments.length == 2) {
+        var keysArr = Object.keys(collection)
+        initial = collection[keysArr[0]]
+      }
+      for (var key in collection) {
+        initial = predicate(initial, collection[key], key)
+      }
+    }
+    return initial
+  }
+
+
+  function reduceRight(collection, predicate, initial) {
+    predicate = iteratee(predicate)
+    if (Array.isArray(collection)) {
+      startIdx = 0
+      if (arguments.length == 2) {
+        initial = collection[0], startIdx = 1
+      }
+      for (var i = collection.length - 1; i >= 0; i--) {
         initial = predicate(initial, collection[i])
       }
     }
@@ -1172,8 +1218,63 @@ var lips5476 = function () {
     return str
   }
 
+  function sample(content) {
+    if (Array.isArray(content)) {
+      var index = Math.floor(Math.random() * (content.length - 0 + 1)) + 0
+      return content[index]
+    } else if (typeof content == 'object') {
+      var arr = Object.keys(content)
+      var index = Math.floor(Math.random() * (content.length - 0 + 1)) + 0
+      return content[arr[index]]
+    }
+  }
 
+  function reject(arr, predicate) {
+    predicate = iteratee(predicate)
+    var res = []
+    for (var item of arr) {
+      if (!predicate(item)) {
+        res.push(item)
+      }
+    }
+    return res
+  }
 
+  function partition(arr, predicate) {
+    predicate = iteratee(predicate)
+    var trueArr = []
+    var falseArr = []
+    for (var item of arr) {
+      if (predicate(item)) {
+        trueArr.push(item)
+      }
+      else {
+        falseArr.push(item)
+      }
+    }
+
+    return [trueArr, falseArr]
+
+  }
+
+  function includes(arr, target) {
+    for (var item of arr) {
+      if (item == target) {
+        return true
+      }
+    }
+    return false
+  }
+
+  function invokeMap(collection, methodas, ...args) {
+    var res = []
+    for (var item of collection) {
+      item = methodas.call(item, ...args)
+      res.push(item)
+    }
+    return res
+
+  }
 
 
 
@@ -1182,6 +1283,7 @@ var lips5476 = function () {
     compact: compact,
     concat: concat,
     uniq: uniq,
+    reject: reject,
     uniqueBy: uniqueBy,
     flattenDepth: flattenDepth,
     flattenDeep: flattenDeep,
@@ -1191,6 +1293,7 @@ var lips5476 = function () {
     filter: filter,///////////////
     map: map,///////////////
     reduce: reduce,/////////////
+    reduceRight: reduceRight,
     zip: zip,
     unzip: unzip,
     keys: keys,
@@ -1263,9 +1366,9 @@ var lips5476 = function () {
     // flatMap: flatMap,
     // flatMapDeep: flatMapDeep,
     // flatMapDepth: flatMapDepth,
-    // forEachRight: forEachRight,
-    // includes: includes,
-    // invokeMap: invokeMap,
+    forEachRight: forEachRight,
+    includes: includes,
+    invokeMap: invokeMap,
     // orderBy: orderBy,
     // partition: partition,
     // reject: reject,
@@ -1292,7 +1395,7 @@ var lips5476 = function () {
     repeat: repeat,
     replace: replace,
     startsWith: startsWith,
-
+    sample: sample,
 
   }
 
