@@ -739,22 +739,20 @@ var lips5476 = function () {
         break
       }
     }
-
     return arr.slice(0, i + 1)
   }
 
   function dropWhile(arr, predicate) {
     predicate = iteratee(predicate)
-    var res = []
-    for (var item of arr) {
-      if (!predicate(item)) {
-        res.push(item)
-      }
-      else {
+    var index = 0
+    for (var i = 0; i < arr.length; i++) {
+      if (!predicate(arr[i])) {
+        index = i
         break
       }
+
     }
-    return res
+    return arr.slice(i + 1)
   }
 
   function head(arr) {
