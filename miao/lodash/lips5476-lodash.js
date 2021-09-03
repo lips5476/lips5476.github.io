@@ -1332,6 +1332,20 @@ var lips5476 = function () {
     return res.reverse().filter(it => it != undefined)
   }
 
+  function takeWhile(arr, predicate) {
+    predicate = iteratee(predicate)
+    var res = []
+    for (var i = 0; i < arr.length; i++) {
+      if (predicate(arr[i])) {
+        res.push(arr[i])
+      }
+      else {
+        break
+      }
+    }
+    return res.filter(it => it != undefined)
+  }
+
 
   return {
     chunk: chunk,
@@ -1403,7 +1417,7 @@ var lips5476 = function () {
     take: take,
     takeRight: takeRight,
     takeRightWhile: takeRightWhile,
-    // takeWhile: takeWhile,
+    takeWhile: takeWhile,
     union: union,
     // unionBy: unionBy,
     // unionWith: unionWith,
