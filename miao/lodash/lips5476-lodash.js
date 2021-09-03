@@ -808,7 +808,6 @@ var lips5476 = function () {
 
   function find(arr, predicate) {
     predicate = iteratee(predicate)
-
     for (var item of arr) {
       if (predicate(item)) {
         return item
@@ -1503,7 +1502,7 @@ var lips5476 = function () {
     // zipObject: zipObject,
     // zipObjectDeep: zipObjectDeep,
     // zipWith: zipWith,
-    // find: find,
+    find: find,
     findLast: findLast,
     flatMap: flatMap,
     // flatMapDeep: flatMapDeep,
