@@ -1225,7 +1225,7 @@ var lips5476 = function () {
   function repeat(str = '', count = 0) {
     var str1 = str
     if (count == 0) {
-      return str
+      return ''
     }
     for (var i = 0; i < count - 1; i++) {
       str += str1
