@@ -1310,6 +1310,27 @@ var lips5476 = function () {
 
 
   }
+  function takeRight(arr, num = 1) {
+    var res = []
+    for (var i = arr.length - 1; i >= arr.length - num; i--) {
+      res.push(arr[i])
+    }
+    return res.reverse().filter(it => it != undefined)
+  }
+
+  function takeRightWhile(arr, predicate) {
+    predicate = iteratee(predicate)
+    var res = []
+    for (var i = arr.length - 1; i >= 0; i--) {
+      if (predicate(arr[i])) {
+        res.push(arr[i])
+      }
+      else {
+        break
+      }
+    }
+    return res.reverse().filter(it => it != undefined)
+  }
 
 
   return {
@@ -1380,8 +1401,8 @@ var lips5476 = function () {
     // sortedLastIndexOf: sortedLastIndexOf,
     tail: tail,
     take: take,
-    // takeRight: takeRight,
-    // takeRightWhile: takeRightWhile,
+    takeRight: takeRight,
+    takeRightWhile: takeRightWhile,
     // takeWhile: takeWhile,
     union: union,
     // unionBy: unionBy,
