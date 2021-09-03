@@ -739,7 +739,6 @@ var lips5476 = function () {
         break
       }
     }
-    console.log(i)
 
     return arr.slice(0, i + 1)
   }
