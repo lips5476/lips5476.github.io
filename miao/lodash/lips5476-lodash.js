@@ -1016,18 +1016,16 @@ var lips5476 = function () {
   }
 
 
-
   function sortedLastIndexBy(arr, num, predicate) {
-    // predicate = iteratee(predicate)
-    // num = predicate(num)
-    // for (var i = 0; i < arr.length; i++) {
-    //   if (predicate(arr[i]) < num) {
-    //     return i + 1
-    //   }
-    //   else if (predicate(arr[i]) == num) {
-    //     return i
-    //   }
-    // }
+    predicate = iteratee(predicate)
+    num = predicate(num)
+    for (var i = arr.length - 1; i >= 0; i--) {
+      if (predicate(arr[i]) == num) {
+        return i + 1
+        break
+      }
+    }
+    return undefined
   }
 
   function tail(arr) {
@@ -1390,11 +1388,11 @@ var lips5476 = function () {
     var index = 0
     for (var i = arr.length; i >= 0; i--) {
       if (arr[i] == val) {
-        index = i
+        return index = i + 1
         break
       }
     }
-    return index + 1
+    return undefined
   }
   function sortedLastIndexOf(arr, val) {
     return sortedLastIndex(arr, val)
