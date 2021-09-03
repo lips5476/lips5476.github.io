@@ -1407,6 +1407,27 @@ var lips5476 = function () {
     return obj
   }
 
+  function unionWith() {
+
+  }
+
+  function uniqBy(arr, predicate) {
+    predicate = iteratee(predicate)
+    var compareArr = []
+    var needArr = []
+    for (var item of arr) {
+      if (!compareArr.includes(predicate(item))) {
+        compareArr.push(predicate(item))
+        needArr.push(item)
+      }
+    }
+    return needArr
+  }
+
+  function uniqWith(arr, predicate) {
+
+  }
+
 
 
 
@@ -1423,6 +1444,7 @@ var lips5476 = function () {
     groupBy: groupBy,
     zipObject: zipObject,
     keyBy: keyBy,
+    uniqBy: uniqBy,
     forEach: forEach,////////////
     filter: filter,///////////////
     map: map,///////////////
