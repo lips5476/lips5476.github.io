@@ -1067,6 +1067,12 @@ var lips5476 = function () {
     }
     return res
   }
+
+
+  function xorBy(...arr) {
+
+
+  }
   function without(arr, ...num) {
     var res = []
     for (var item of arr) {
@@ -1380,6 +1386,31 @@ var lips5476 = function () {
     }
     return res
   }
+  function sortedIndexOf(arr, val) {
+    return sortedIndex(arr, val)
+  }
+
+  function sortedLastIndex(arr, val) {
+    var index = 0
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] == val) {
+        index = i
+      }
+    }
+    return index
+  }
+  function sortedLastIndexOf(arr, val) {
+    return sortedLastIndex(arr, val)
+  }
+
+
+  function zipObject(arr1, arr2) {
+    var obj = {}
+    for (var i = 0; i < arr1.length; i++) {
+      obj[arr1[i]] = arr2[i]
+    }
+    return obj
+  }
 
 
 
@@ -1395,6 +1426,7 @@ var lips5476 = function () {
     flattenDepth: flattenDepth,
     flattenDeep: flattenDeep,
     groupBy: groupBy,
+    zipObject: zipObject,
     keyBy: keyBy,
     forEach: forEach,////////////
     filter: filter,///////////////
@@ -1452,7 +1484,8 @@ var lips5476 = function () {
     sortedIndex: sortedIndex,
     sortedIndexBy: sortedIndexBy,
     sortedLastIndexOf: sortedLastIndexOf,
-    // sortedLastIndexOf: sortedLastIndexOf,
+    sortedLastIndex: sortedLastIndex,
+    sortedIndexOf: sortedIndexOf,
     tail: tail,
     take: take,
     takeRight: takeRight,
@@ -1465,8 +1498,8 @@ var lips5476 = function () {
     without: without,
     xor: xor,
     every: every,
-    // xorBy: xorBy,
-    // xorBy: xorBy,
+    xorBy: xorBy,
+
     // zipObject: zipObject,
     // zipObjectDeep: zipObjectDeep,
     // zipWith: zipWith,
