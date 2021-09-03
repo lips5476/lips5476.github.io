@@ -1014,11 +1014,8 @@ var lips5476 = function () {
       if (arr[i] == value) return i
     return -1
   }
-  function sortedLastIndexOf(arr, value) {
-    for (var i = arr.length; i >= 0; i--)
-      if (arr[i] == value) return i
-    return -1
-  }
+
+
 
   function sortedLastIndexBy(arr, num, predicate) {
     // predicate = iteratee(predicate)
@@ -1391,12 +1388,13 @@ var lips5476 = function () {
 
   function sortedLastIndex(arr, val) {
     var index = 0
-    for (var i = 0; i < arr.length; i++) {
+    for (var i = arr.length; i >= 0; i--) {
       if (arr[i] == val) {
         index = i
+        break
       }
     }
-    return index
+    return index + 1
   }
   function sortedLastIndexOf(arr, val) {
     return sortedLastIndex(arr, val)
