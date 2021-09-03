@@ -1297,10 +1297,12 @@ var lips5476 = function () {
   }
 
   function invokeMap(collection, methodas, ...args) {
-    if (typeof path == 'string') {
-      return collection.map(val => { console.log(val[path]); return val[path](...args) });
-    } else if (typeof path == 'function') {
-      return collection.map(val => path.call(val, ...args));
+    if (typeof methodas == 'string') {
+      return collection.map(val => {
+        return val[methodas](...args)
+      });
+    } else if (typeof methodas == 'function') {
+      return collection.map(val => methodas.call(val, ...args));
     }
   }
 
