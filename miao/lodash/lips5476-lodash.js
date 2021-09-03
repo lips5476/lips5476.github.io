@@ -1356,6 +1356,35 @@ var lips5476 = function () {
     })
   }
 
+  function sortedUniqBy(arr, predicate) {
+    predicate = iteratee(predicate)
+    var res = []
+    for (var item of arr) {
+      if (!res.map(it => predicate(it)).includes(predicate(item))) {
+        res.push(item)
+      }
+    }
+    return res.sort((a, b) => {
+      return a - b
+    })
+  }
+  function unionBy(...arr) {
+    var predicate = arr.pop()
+    predicate = iteratee(predicate)
+    var needArr = [].concat(...arr)
+    var res = []
+    for (var item of needArr) {
+      if (!res.map(it => predicate(it)).includes(predicate(item))) {
+        res.push(item)
+      }
+    }
+    return res
+  }
+
+
+
+
+
   return {
     chunk: chunk,
     compact: compact,
@@ -1376,6 +1405,7 @@ var lips5476 = function () {
     unzip: unzip,
     keys: keys,
     sortedUniq: sortedUniq,
+    sortedUniqBy: sortedUniqBy,
     values: values,
     sortBy: sortBy,////////////
     isEqual: isEqual,//////
@@ -1429,7 +1459,7 @@ var lips5476 = function () {
     takeRightWhile: takeRightWhile,
     takeWhile: takeWhile,
     union: union,
-    // unionBy: unionBy,
+    unionBy: unionBy,
     // unionWith: unionWith,
     // unzipWith: unzipWith,
     without: without,
