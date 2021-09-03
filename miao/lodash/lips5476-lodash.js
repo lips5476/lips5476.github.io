@@ -1347,6 +1347,15 @@ var lips5476 = function () {
   }
 
 
+
+  function sortedUniq(arr) {
+    var set = new Set(arr)
+    var resArr = Array.from(set)
+    return resArr.sort((a, b) => {
+      return a - b
+    })
+  }
+
   return {
     chunk: chunk,
     compact: compact,
@@ -1366,6 +1375,7 @@ var lips5476 = function () {
     zip: zip,
     unzip: unzip,
     keys: keys,
+    sortedUniq: sortedUniq,
     values: values,
     sortBy: sortBy,////////////
     isEqual: isEqual,//////
