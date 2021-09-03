@@ -1272,7 +1272,7 @@ var lips5476 = function () {
 
   }
 
-  function includes(content, target, index) {
+  function includes(content, target, index = 0) {
     if (typeof content == 'string') {
       var startContent = content
       resContent = content.split(target)
