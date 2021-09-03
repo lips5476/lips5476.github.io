@@ -752,7 +752,7 @@ var lips5476 = function () {
       }
 
     }
-    return arr.slice(i + 1)
+    return arr.slice(i)
   }
 
   function head(arr) {
