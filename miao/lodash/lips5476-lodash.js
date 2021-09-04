@@ -426,6 +426,28 @@ var lips5476 = function () {
     return res
 
   }
+
+  function unzipWith(arr, predicate) {
+    predicate = iteratee(predicate)
+    var res = []
+    for (var i = 0; i < arr[0].length; i++) {
+      var temp = []
+      for (var j = 0; j < arr.length; j++) {
+        temp.push(arr[j][i])
+      }
+      res.push(temp)
+    }
+
+    var needadd = res[0]
+    for (var i = 1; i < res.length; i++) {
+      predicate(needadd, res[i])
+    }
+    return needadd
+  }
+
+
+
+
   function keys(obj) {
     var arr = []
     if (Array.isArray(obj)) {
@@ -1398,7 +1420,7 @@ var lips5476 = function () {
     var index = 0
     for (var i = arr.length; i >= 0; i--) {
       if (arr[i] == val) {
-        return index = i + 1
+        return index = i
         break
       }
     }
@@ -1449,7 +1471,6 @@ var lips5476 = function () {
   function uniqWith(arr, predicate) {
     predicate = iteratee(predicate)
     var res = []
-
     for (var item of arr) {
       var flag = true
       for (var items of res) {
@@ -1461,9 +1482,7 @@ var lips5476 = function () {
         res.push(item)
       }
     }
-
     return res
-
   }
 
 
