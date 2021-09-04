@@ -437,13 +437,13 @@ var lips5476 = function () {
       }
       res.push(temp)
     }
-
     var needadd = res[0]
     for (var i = 1; i < res.length; i++) {
-      predicate(needadd, res[i])
+      needadd = predicate(needadd, res[i])
     }
     return needadd
   }
+
 
 
 
@@ -1120,6 +1120,17 @@ var lips5476 = function () {
     return res
   }
 
+  function xorWith(...arr) {
+    predicate = arr.pop()
+    predicate = iteratee(predicate)
+
+    var needArr = [].concat(...arr)
+    var res = []
+    var obj = {}
+
+
+  }
+
   function every(arr, predicate) {
     predicate = iteratee(predicate)
     for (var item of arr) {
@@ -1510,6 +1521,8 @@ var lips5476 = function () {
 
 
 
+
+
   return {
     chunk: chunk,
     compact: compact,
@@ -1517,6 +1530,7 @@ var lips5476 = function () {
     uniq: uniq,
     reject: reject,
     uniqueBy: uniqueBy,
+    uniqWith: uniqWith,
     flattenDepth: flattenDepth,
     flattenDeep: flattenDeep,
     groupBy: groupBy,
