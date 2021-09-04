@@ -1091,27 +1091,24 @@ var lips5476 = function () {
     var needArr = [].concat(...arr)
     var obj = {}
     var resNeed = []
-
-    for (var item of needArr) {               //  2    1    4   2
-      if (!resNeed.includes(predicate(item))) {   //[2.1, 1.2, 4.3, 2.4]
-        resNeed.push(predicate(item))
-        obj[item] = 1
+    //  2    1    4   2
+    //[2.1, 1.2, 4.3, 2.4]
+    var copyArr = needArr.map(it => predicate(it))
+    for (var i = 0; i < copyArr.length; i++) {
+      if (!obj[copyArr[i]]) {
+        obj[copyArr[i]] = [i]
       } else {
-        obj[item]++
+        obj[copyArr[i]].push(i)
       }
-      var res = []
-      for (key in obj) {
-        if (obj[key] == 1) {
-          res.push(key)
+    }
+    for (var key in obj) {
+      if (obj[key].length != 1) {
+        for (var item of obj[key]) {
+          needArr[item] = 0
         }
       }
-      return res
     }
-
-
-
-
-
+    return needArr.filter(it => it != 0)
   }
   function without(arr, ...num) {
     var res = []
