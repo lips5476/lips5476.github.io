@@ -1414,8 +1414,23 @@ var lips5476 = function () {
     return obj
   }
 
-  function unionWith() {
-
+  function unionWith(...arr) {
+    predicate = arr.pop()
+    predicate = iteratee(predicate)
+    var needArr = [].concat(...arr)
+    var res = []
+    for (var item of needArr) {
+      var flag = true
+      for (var items of res) {
+        if (predicate(items, item)) {
+          flag = false
+        }
+      }
+      if (flag) {
+        res.push(item)
+      }
+    }
+    return res
   }
 
   function uniqBy(arr, predicate) {
