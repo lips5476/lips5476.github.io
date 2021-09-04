@@ -1395,7 +1395,14 @@ var lips5476 = function () {
     return undefined
   }
   function sortedLastIndexOf(arr, val) {
-    return sortedLastIndex(arr, val)
+    var index = 0
+    for (var i = arr.length; i >= 0; i--) {
+      if (arr[i] == val) {
+        return index = i + 1
+        break
+      }
+    }
+    return undefined
   }
 
 
@@ -1503,6 +1510,7 @@ var lips5476 = function () {
     sortedLastIndexOf: sortedLastIndexOf,
     sortedLastIndex: sortedLastIndex,
     sortedIndexOf: sortedIndexOf,
+    sortedLastIndexBy: sortedLastIndexBy,
     tail: tail,
     take: take,
     takeRight: takeRight,
