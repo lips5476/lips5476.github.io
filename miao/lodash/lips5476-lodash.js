@@ -1086,6 +1086,30 @@ var lips5476 = function () {
 
 
   function xorBy(...arr) {
+    predicate = arr.pop()
+    predicate = iteratee(predicate)
+    var needArr = [].concat(...arr)
+    var obj = {}
+    var resNeed = []
+
+    for (var item of needArr) {               //  2    1    4   2
+      if (!resNeed.includes(predicate(item))) {   //[2.1, 1.2, 4.3, 2.4]
+        resNeed.push(predicate(item))
+        obj[item] = 1
+      } else {
+        obj[item]++
+      }
+      var res = []
+      for (key in obj) {
+        if (obj[key] == 1) {
+          res.push(key)
+        }
+      }
+      return res
+    }
+
+
+
 
 
   }
