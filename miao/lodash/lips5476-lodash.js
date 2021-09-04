@@ -1447,6 +1447,22 @@ var lips5476 = function () {
   }
 
   function uniqWith(arr, predicate) {
+    predicate = iteratee(predicate)
+    var res = []
+
+    for (var item of arr) {
+      var flag = true
+      for (var items of res) {
+        if (predicate(items, item)) {
+          flag = false
+        }
+      }
+      if (flag) {
+        res.push(item)
+      }
+    }
+
+    return res
 
   }
 
