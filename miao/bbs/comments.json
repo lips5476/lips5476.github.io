@@ -1,0 +1,32 @@
+[
+  {
+    "comment": "星辰大海",
+    "timestamp": "2021-09-18T13:25:09.170Z",
+    "postId": "1",
+    "commentBy": "a"
+  },
+  {
+    "comment": "bbs",
+    "timestamp": "2021-09-18T13:26:49.695Z",
+    "postId": "1",
+    "commentBy": "a"
+  },
+  {
+    "comment": "666",
+    "timestamp": "2021-09-18T13:37:48.523Z",
+    "postId": "2",
+    "commentBy": "a"
+  },
+  {
+    "comment": "777",
+    "timestamp": "2021-09-18T13:38:08.987Z",
+    "postId": "2",
+    "commentBy": "a"
+  },
+  {
+    "comment": "第0个话题",
+    "timestamp": "2021-09-18T13:56:24.985Z",
+    "postId": "0",
+    "commentBy": "a"
+  }
+]

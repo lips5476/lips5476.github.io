@@ -1468,6 +1468,12 @@ var lips5476 = function () {
     return obj
   }
 
+  function zipObjectDeep(arr1, arr2) {
+
+  }
+
+
+
   function unionWith(...arr) {
     predicate = arr.pop()
     predicate = iteratee(predicate)
@@ -1609,9 +1615,7 @@ var lips5476 = function () {
     xor: xor,
     every: every,
     xorBy: xorBy,
-
-    // zipObject: zipObject,
-    // zipObjectDeep: zipObjectDeep,
+    zipObjectDeep: zipObjectDeep,
     // zipWith: zipWith,
     find: find,
     findLast: findLast,
